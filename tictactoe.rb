@@ -17,3 +17,15 @@ class Board < TicTacToe
   end
 
 end
+
+class Player < TicTacToe
+
+  def initialize
+    @board = Board.new_board
+    @player1 = "X"
+    @player2 = "O"
+
+    puts @board
+  end
+
+end
