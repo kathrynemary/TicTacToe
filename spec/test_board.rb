@@ -35,11 +35,9 @@ describe Player do
     expect(@x.instance_variable_get("@player2")).to eq("O")
   end
 
-  # it "shouldn't have the 2 symbols match" do
-  #   expect(x.instance_variable_get)
-  # end
-
-
+  it "shouldn't have the 2 symbols match" do
+    expect(@x.instance_variable_get("@player1")).not_to eql(@x.instance_variable_get("@player2"))
+  end
 
 
 end
