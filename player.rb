@@ -3,12 +3,10 @@ require_relative './board'
 
 class Player < TicTacToe
 
-  def initialize
-    @board = Board.new_board
-    @player1 = "X"
-    @player2 = "O"
+  attr_reader :symbol
 
-    puts "\n#{@board}"
+  def initialize(symbol)
+    @symbol = symbol
   end
 
 end

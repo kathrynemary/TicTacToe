@@ -1,27 +1,26 @@
-require_relative '../tictactoe'
-require_relative '../player'
 require_relative '../board'
 
 describe Board do
 
-  it "should have 3 lines" do
-    expect(Board.new_board).to include("\n"){2}
+  it "should have 9 spaces" do
+    expect(Board.new.size).to be == 9
   end
 
-  it "should have 9 spaces total" do
-    expect(Board.new_board).to match(/\d/){9}
+end
+
+describe Space do
+
+  before :each do
+    @x = Space.new(0)
   end
 
-  it "should have dividers between each board space" do
-    expect(Board.new_board).to include("|"){12}
+  it "status can be non-picked" do
+    expect(@x.picked).to eq(false)
   end
 
-  it "should sub for x at a given spot" do #but iiiis this working?
-    expect(Board.update("a", 4)).to include("a")
+  it "status can change to picked" do
+    @x.pick
+    expect(@x.picked).to eq(true)
   end
-
-    it "should update from previously changed version" do #ditto
-      expect(Board.update("a", 5)).to include("a"){2}
-    end
 
 end

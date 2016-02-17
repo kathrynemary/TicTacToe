@@ -1,22 +1,33 @@
+
 require_relative './tictactoe'
-require_relative './player'
 
 class Board < TicTacToe
 
-  def self.new_board
-    "| 0 | 1 | 2 |\n| 3 | 4 | 5 |\n| 6 | 7 | 8 |"
+  def initialize
+    @board = Array.new(9)
+    @board.each do |space|
+      @space = Space.new(space)
+    end
   end
 
-  def self.update(value, spot)
-    @value = value
-    @spot = spot
-    @board = new_board
-
-    @board.gsub!("#{@spot}", "#{@value}")
+  def size
+    @board.length
   end
 
-  def self.print_board
-    puts "\n#{@board} \n"
+end
+
+class Space < Board
+
+  attr_reader :number
+  attr_reader :picked
+
+  def initialize(number)
+    @number = number
+    @picked = false
+  end
+
+  def pick
+    @picked = true
   end
 
 end
