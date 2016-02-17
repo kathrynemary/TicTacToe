@@ -6,6 +6,10 @@ describe Board do
     expect(Board.new.size).to be == 9
   end
 
+  it "should list non-occupied spaces" do
+    expect(Board.new.available_spaces.size).to be == 9
+  end
+
 end
 
 describe Space do

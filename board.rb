@@ -3,10 +3,21 @@ require_relative './tictactoe'
 
 class Board < TicTacToe
 
+  attr_reader :space
+
   def initialize
     @board = Array.new(9)
     @board.each do |space|
       @space = Space.new(space)
+    end
+  end
+
+  def available_spaces
+    available_spaces = []
+    @board.each do |add|
+      if @space.picked == false
+        available_spaces.push(@space)
+      end
     end
   end
 
