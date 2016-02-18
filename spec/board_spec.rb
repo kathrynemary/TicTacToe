@@ -2,29 +2,27 @@ require_relative '../board'
 
 describe Board do
 
-  it "should have 9 spaces" do
-    expect(Board.new.size).to be == 9
-  end
-
-  it "should list non-occupied spaces" do
-    expect(Board.new.available_spaces.size).to be == 9
-  end
-
-end
-
-describe Space do
-
   before :each do
-    @x = Space.new(0)
+    @x = Board.new
   end
 
-  it "status can be non-picked" do
-    expect(@x.picked).to eq(false)
+  it "should have 9 spaces" do
+    expect(@x.board.size).to be == 9
   end
 
-  it "status can change to picked" do
-    @x.pick
-    expect(@x.picked).to eq(true)
+  it "should list available spaces" do
+    expect(@x.available_spaces.size).to be == 9
   end
+
+  it "should take an item out of available when it is picked" do
+    @x.pick(1)
+    expect(@x.available_spaces.size).to be == 8
+  end
+
+  it "should know the location of the unavailable space" do
+    @x.pick(1)
+    expect(@x.available_spaces).not_to include(1)
+  end
+
 
 end
