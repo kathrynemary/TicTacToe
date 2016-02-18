@@ -1,7 +1,7 @@
 require_relative './tictactoe'
 require_relative './board'
 
-class Player < TicTacToe
+class Player
 
   attr_reader :symbol
 

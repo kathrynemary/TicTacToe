@@ -3,7 +3,7 @@ require_relative './player'
 require_relative './board'
 
 
-class Game < TicTacToe
+class Game
 
   attr_reader :player1
   attr_reader :player2
@@ -13,14 +13,6 @@ class Game < TicTacToe
     @player1 = Player.new("X")
     @player2 = Player.new("O")
     @board = Board.new
-  end
-
-end
-
-class Move < Game
-
-  def pick(number)
-    Space.new(number).pick
   end
 
 end

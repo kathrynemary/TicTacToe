@@ -15,6 +15,36 @@ class Board
 
   def pick(key)
     @board[key] = "picked"
+    status
+  end
+
+  def status
+    winner? ? "winner" : "not yet"
+  end
+
+  def winner?
+    taken = @board.select {|key, value| value == "picked"}
+    if taken.has_key?(0)
+      if taken.has_key?(1) && taken.has_key?(2)
+        true
+      elsif taken.has_key?(4) && taken.has_key?(8)
+        true
+      elsif taken.has_key?(3) && taken.has_key?(6)
+        true
+      end
+    elsif taken.has_key?(1) && taken.has_key?(7) && taken.has_key?(4)
+      true
+    elsif taken.has_key?(2)
+      if taken.has_key?(5) && taken.has_key?(8)
+        true
+      elsif taken.has_key?(4) && taken.has_key?(6)
+        true
+      end
+    elsif taken.has_key?(3) && taken.has_key?(4) && taken.has_key?(5)
+      true
+    elsif taken.has_key?(6) && taken.has_key?(7) && taken.has_key?(8)
+      true
+    end
   end
 
 end

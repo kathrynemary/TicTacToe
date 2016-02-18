@@ -24,5 +24,18 @@ describe Board do
     expect(@x.available_spaces).not_to include(1)
   end
 
+  it "should identify when there is a winner" do
+    @x.pick(0)
+    @x.pick(1)
+    @x.pick(2)
+    expect(@x.winner?).to eq true
+  end
+
+  it "should identify when there is a diagonal winner" do
+    @x.pick(2)
+    @x.pick(4)
+    @x.pick(6)
+    expect(@x.winner?).to eq true
+  end
 
 end
