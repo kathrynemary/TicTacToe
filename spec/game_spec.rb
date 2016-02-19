@@ -19,32 +19,37 @@ describe Game do
   end
 
   it "should pick a space on the board" do
-    expect(@x.board.pick(2)).to eq(Board.new.pick(2))
+    expect(@x.board.pick("t", 2)).to eq(Board.new.pick("t", 2))
   end
 
   it "should show correct # avail spaces after a space is picked" do
-    @x.board.pick(2)
+    @x.board.pick("t", 2)
     expect(@x.board.available_spaces).not_to include(2)
   end
 
   it "should identify a winner" do
-    @x.board.pick(0)
-    @x.board.pick(1)
-    @x.board.pick(2)
-    expect(@x.board.status).to eq("win")
+    @x.board.pick("t", 0)
+    @x.board.pick("t", 1)
+    @x.board.pick("t", 2)
+    expect(@x.board.winner?("t")).to eq(true)
   end
 
   it "should identify a tie" do
-    @x.board.pick(0)
-    @x.board.pick(1)
-    @x.board.pick(2)
-    @x.board.pick(3)
-    @x.board.pick(4)
-    @x.board.pick(5)
-    @x.board.pick(6)
-    @x.board.pick(7)
-    @x.board.pick(8)
-    expect(@x.board.status).to eq("tie")
+    @x.board.pick("t", 0)
+    @x.board.pick("t", 1)
+    @x.board.pick("t", 2)
+    @x.board.pick("t", 3)
+    @x.board.pick("t", 4)
+    @x.board.pick("t", 5)
+    @x.board.pick("t", 6)
+    @x.board.pick("t", 7)
+    @x.board.pick("t", 8)
+    expect(@x.board.winner?("t")).to eq("tie")
   end
+
+  it "should pick spaces with the correct symbol" do
+    expect(@x.pick(:player1, 0)).to eq(Board.new.pick("X", 0))
+  end
+
 
 end

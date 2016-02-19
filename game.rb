@@ -15,4 +15,8 @@ class Game
     @board = Board.new
   end
 
+  def pick(player, space)
+    @board.pick(player, space)
+  end
+
 end

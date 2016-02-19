@@ -13,54 +13,46 @@ class Board
     @board.select {|key,value| value == "open"}
   end
 
-  def pick(key)
-    @board[key] = "picked"
-    status
+  def pick(symbol, key)
+    @board[key] = symbol
+    winner?(symbol)
   end
 
-  def status
-    winner?
-    if true
+  def winner?(symbol)
+    taken = @board.select {|key, value| value == symbol}
+    if taken.has_key?(0)
+      if taken.has_key?(1) && taken.has_key?(2)
+        row = true
+      elsif taken.has_key?(4) && taken.has_key?(8)
+        row = true
+      elsif taken.has_key?(3) && taken.has_key?(6)
+        row = true
+      end
+    elsif taken.has_key?(1) && taken.has_key?(7) && taken.has_key?(4)
+      row = true
+    elsif taken.has_key?(2)
+      if taken.has_key?(5) && taken.has_key?(8)
+        row = true
+      elsif taken.has_key?(4) && taken.has_key?(6)
+        row = true
+      end
+    elsif taken.has_key?(3) && taken.has_key?(4) && taken.has_key?(5)
+      row = true
+    elsif taken.has_key?(6) && taken.has_key?(7) && taken.has_key?(8)
+      row = true
+    else
+      row = false
+    end
+
+    if row == true
       if available_spaces.empty?
         "tie"
       else
-        "win"
+        true
       end
     else
-      "not yet"
-    end
-  end
-
-  def winner?
-    taken = @board.select {|key, value| value == "picked"}
-    if taken.has_key?(0)
-      if taken.has_key?(1) && taken.has_key?(2)
-        true
-      elsif taken.has_key?(4) && taken.has_key?(8)
-        true
-      elsif taken.has_key?(3) && taken.has_key?(6)
-        true
-      end
-    elsif taken.has_key?(1) && taken.has_key?(7) && taken.has_key?(4)
-      true
-    elsif taken.has_key?(2)
-      if taken.has_key?(5) && taken.has_key?(8)
-        true
-      elsif taken.has_key?(4) && taken.has_key?(6)
-        true
-      end
-    elsif taken.has_key?(3) && taken.has_key?(4) && taken.has_key?(5)
-      true
-    elsif taken.has_key?(6) && taken.has_key?(7) && taken.has_key?(8)
-      true
+      false
     end
   end
 
 end
-
-
-@x = Board.new
-@x.pick(2)
-@x.pick(4)
-@x.pick(6)
-puts @x.available_spaces
