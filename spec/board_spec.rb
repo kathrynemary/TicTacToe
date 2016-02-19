@@ -35,7 +35,20 @@ describe Board do
     @x.pick(2)
     @x.pick(4)
     @x.pick(6)
-    expect(@x.winner?).to eq true
+    expect(@x.status).to eq("win")
+  end
+
+  it "should identify a tied game" do
+    @x.pick(0)
+    @x.pick(1)
+    @x.pick(2)
+    @x.pick(3)
+    @x.pick(4)
+    @x.pick(5)
+    @x.pick(6)
+    @x.pick(7)
+    @x.pick(8)
+    expect(@x.status).to eq("tie")
   end
 
 end

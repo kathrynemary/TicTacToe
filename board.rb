@@ -19,7 +19,16 @@ class Board
   end
 
   def status
-    winner? ? "winner" : "not yet"
+    winner?
+    if true
+      if available_spaces.empty?
+        "tie"
+      else
+        "win"
+      end
+    else
+      "not yet"
+    end
   end
 
   def winner?
@@ -48,3 +57,10 @@ class Board
   end
 
 end
+
+
+@x = Board.new
+@x.pick(2)
+@x.pick(4)
+@x.pick(6)
+puts @x.available_spaces
