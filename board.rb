@@ -22,8 +22,10 @@ class Board
   end
 
   def exclude?(thing)
-    unless inlcudes?(thing)
+    unless available_spaces.has_key? thing
       return true
+    else
+      return false
     end
   end
 
