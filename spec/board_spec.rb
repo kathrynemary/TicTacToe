@@ -63,4 +63,9 @@ describe Board do
     expect(@x.winner?("y")).to eq false
   end
 
+  it "should not allow you to pick the same space twice" do
+    @x.pick("X", 1)
+    expect(@x.pick("O", 1)).to eq("Error!")
+  end
+
 end

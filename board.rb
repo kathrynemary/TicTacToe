@@ -14,8 +14,17 @@ class Board
   end
 
   def pick(symbol, key)
-    @board[key] = symbol
-    winner?(symbol)
+    if available_spaces.include? key
+      @board[key] = symbol
+    else
+      "Error!"
+    end
+  end
+
+  def exclude?(thing)
+    unless inlcudes?(thing)
+      return true
+    end
   end
 
   def winner?(symbol)
