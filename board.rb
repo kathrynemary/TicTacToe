@@ -6,16 +6,21 @@ class Board
   attr_reader :board
 
   def initialize
-    @board = {0 => "open", 1 => "open", 2 => "open", 3 => "open", 4 => "open", 5 => "open", 6 => "open", 7 => "open", 8 => "open"}
+    @board = {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8}
   end
+
+  # def initialize
+  #   @board = {0 => "open", 1 => "open", 2 => "open", 3 => "open", 4 => "open", 5 => "open", 6 => "open", 7 => "open", 8 => "open"}
+  # end
 
   def available_spaces
-    @board.select {|key,value| value == "open"}
+    @board.select {|key,value| value.instance_of?(Fixnum) }
   end
 
-  def pick(symbol, key)
+  def pick(character, key)
     if available_spaces.include? key
-      @board[key] = symbol
+      @board[key] = character
+      @board
     else
       "Error!"
     end

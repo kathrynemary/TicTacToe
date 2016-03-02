@@ -1,24 +1,39 @@
 require_relative './board'
-require_relative './game'
-require_relative './player'
 
-class Interface
+module Interface
 
-  attr_reader :player
-  attr_reader :symbol
+  attr_reader :player1, :player2, :board
 
-  def get_symbol
+  def self.get_symbol
+    x = gets.chomp
+    if x =~ /\w{1}/
+      x
+    else
+      puts "The symbol must be one letter character. Please try again."
+      ask_symbol(@player)
+    end
+  end
+
+  def self.ask_symbol(player)
+    @player = player
+    puts "What symbol do you want to use for #{player}?"
+    get_symbol
+  end
+
+  def self.determine_order
+    puts "Who would you like to go first?" #refactor to include correct names?
+    get_order
+  end
+
+  def self.get_order
     gets.chomp
   end
 
-  def ask_symbol(player)
-    @player = player
-    puts "What symbol do you want to use for #{@player}?"
-    @symbol = get_symbol
-    @player = Player.new(symbol)
+  def self.display_board(x)
+    y = "\n#{x.fetch(0)} | #{x.fetch(1)} | #{x.fetch(2)}\n#{x.fetch(3)} | #{x.fetch(4)} | #{x.fetch(5)}\n#{x.fetch(6)} | #{x.fetch(7)} | #{x.fetch(8)}\n"
+    y
   end
 
 end
 
-x = Interface.new.ask_symbol("l")
-puts x.symbol
+Interface.ask_symbol("k")
