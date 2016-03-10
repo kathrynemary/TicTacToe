@@ -6,17 +6,13 @@ class Board
     @board = {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8}
   end
 
-  # def initialize
-  #   @board = {0 => "open", 1 => "open", 2 => "open", 3 => "open", 4 => "open", 5 => "open", 6 => "open", 7 => "open", 8 => "open"}
-  # end
-
   def available_spaces
     @board.select {|key,value| value.instance_of?(Fixnum) }
   end
 
-  def pick(character, key)
+  def pick(player, key)
     if available_spaces.include? key
-      @board[key] = character
+      @board[key] = player
       @board
     else
       "Error!"
@@ -66,6 +62,7 @@ class Board
     else
       false
     end
+
   end
 
 end

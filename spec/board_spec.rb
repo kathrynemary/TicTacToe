@@ -15,39 +15,46 @@ describe Board do
   end
 
   it "should know the location of the unavailable space" do
-    @x.pick("y", 1)
+    @x.pick(:player1, 1)
     expect(@x.available_spaces).not_to include(1)
   end
 
   it "should identify when there is a winner" do
-    @x.pick("y", 0)
-    @x.pick("y", 1)
-    @x.pick("y", 2)
-    expect(@x.winner?("y")).to eq true
+    @x.pick(:player1, 0)
+    @x.pick(:player1, 1)
+    @x.pick(:player1, 2)
+    expect(@x.winner?(:player1)).to eq true
   end
 
   it "should identify when there is a diagonal winner" do
-    @x.pick("y", 2)
-    @x.pick("y", 4)
-    @x.pick("y", 6)
-    expect(@x.winner?("y")).to eq true
+    @x.pick(:player1, 2)
+    @x.pick(:player1, 4)
+    @x.pick(:player1, 6)
+    expect(@x.winner?(:player1)).to eq true
+  end
+
+  it "shouldn't say there's a winner if a row is full" do
+    @x.pick(:player1, 0)
+    @x.pick(:player2, 1)
+    @x.pick(:player1, 2)
+    expect(@x.winner?(:player1)).to eq false
   end
 
   it "should identify a tied game" do
-    @x.pick("y", 0)
-    @x.pick("y", 1)
-    @x.pick("y", 2)
-    @x.pick("y", 3)
-    @x.pick("y", 4)
-    @x.pick("y", 5)
-    @x.pick("y", 6)
-    @x.pick("y", 7)
-    @x.pick("y", 8)
-    expect(@x.winner?("y")).to eq("tie")
+    @x.pick(:player1, 0)
+    @x.pick(:player1, 1)
+    @x.pick(:player1, 2)
+    @x.pick(:player1, 3)
+    @x.pick(:player1, 4)
+    @x.pick(:player1, 5)
+    @x.pick(:player1, 6)
+    @x.pick(:player1, 7)
+    @x.pick(:player1, 8)
+    expect(@x.winner?(:player1)).to eq("tie")
   end
 
   it "should identify when a player picks a spot" do
-    @x.pick("X", 2)
+    @x.pick(:player1, 2)
     expect(@x.available_spaces).not_to include(2)
   end
 

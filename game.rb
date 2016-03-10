@@ -3,6 +3,7 @@ require_relative './player'
 require_relative './board'
 require_relative './computer'
 require_relative './Intelligence'
+require_relative './interface'
 
 class Game
 
@@ -11,27 +12,22 @@ class Game
   attr_reader :board
 
   def initialize
-    @player1 = choose_symbol(player1, symbol="X")
-    @player2 = choose_symbol(player2, symbol="0")
+    @player1 = choose_symbol(player1)
+    @player2 = choose_symbol(player2)
     @board = Board.new
   end
 
-  def choose_symbol(player, symbol)
+  def choose_symbol(player)
+    symbol = Interface.ask_symbol(player)
     player = Player.new(symbol)
   end
 
-  def setup(input)
-    if input == "Single Player"
-      SinglePlayer.new
-    elsif input == "Two Player"
-      TwoPlayer.new
-    elsif input == "Two Computer"
-      TwoComputer.new
-    end
+  def setup
+    Interface.ask_game_type
   end
 
-  def pick(symbol, space)
-    @board.pick(symbol, space)
+  def pick(player, space)
+    @board.pick(player, space)
   end
 
 end
@@ -42,15 +38,9 @@ class SinglePlayer < Game
     @player2 = Computer.new("O")
   end
 
-   # @player1.name = name || "the human"
-   # @player2.name = name || "the computer"
-
 end
 
 class TwoPlayer < Game
-
- # @player1.name = name || "first human"
- # @player2.name = name || "second human"  
 
 end
 
@@ -61,7 +51,4 @@ class TwoComputer < Game
     @player2 = Computer.new("O")
   end 
 
- #   @player1.name = "the first computer"
- #   @player2.name = "the second computer"
- 
 end

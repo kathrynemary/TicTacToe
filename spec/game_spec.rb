@@ -9,6 +9,7 @@ describe Game do
 
   before :each do
     @x = Game.new
+    allow(Interface).to receive(:get_symbol) { "X" }
   end
 
    it "should summon an instance of board" do
@@ -16,53 +17,56 @@ describe Game do
    end
   
    it "should pick a space on the board" do
-     expect(@x.board.pick("t", 2)).to eq(Board.new.pick("t", 2))
+     expect(@x.board.pick(:player1, 2)).to eq(Board.new.pick(:player1, 2))
    end
   
    it "should show correct # avail spaces after a space is picked" do
-     @x.board.pick("t", 2)
+     @x.board.pick(:player1, 2)
      expect(@x.board.available_spaces).not_to include(2)
    end
   
    it "should identify a winner" do
-     @x.board.pick("t", 0)
-     @x.board.pick("t", 1)
-     @x.board.pick("t", 2)
-     expect(@x.board.winner?("t")).to eq(true)
+     @x.board.pick(:player1, 0)
+     @x.board.pick(:player1, 1)
+     @x.board.pick(:player1, 2)
+     expect(@x.board.winner?(:player1)).to eq(true)
    end
   
    it "should identify a tie" do
-     @x.board.pick("t", 0)
-     @x.board.pick("t", 1)
-     @x.board.pick("t", 2)
-     @x.board.pick("t", 3)
-     @x.board.pick("t", 4)
-     @x.board.pick("t", 5)
-     @x.board.pick("t", 6)
-     @x.board.pick("t", 7)
-     @x.board.pick("t", 8)
-     expect(@x.board.winner?("t")).to eq("tie")
+     @x.board.pick(:player1, 0)
+     @x.board.pick(:player1, 1)
+     @x.board.pick(:player1, 2)
+     @x.board.pick(:player1, 3)
+     @x.board.pick(:player1, 4)
+     @x.board.pick(:player1, 5)
+     @x.board.pick(:player1, 6)
+     @x.board.pick(:player1, 7)
+     @x.board.pick(:player1, 8)
+     expect(@x.board.winner?(:player1)).to eq("tie")
    end
   
-   it "should pick spaces with the correct symbol" do
-     expect(@x.pick(@x.player1.symbol, 0)).to eq(Board.new.pick("X", 0))
+   it "should pick spaces with the correct symbol" do 
+     expect(@x.pick(:player1, 0)).to eq(Board.new.pick(:player1, 0))
    end
   
    it "should have an option to play with 1 player, 1 computer" do
-     expect(@x.setup("Single Player")).to be_an_instance_of(SinglePlayer)
+      allow(Interface).to receive(:ask_game_type) {SinglePlayer.new}
+      expect(@x.setup).to be_a(SinglePlayer)
    end
   
    it "should have an option to play with 2 human players" do
-     expect(@x.setup("Two Player")).to be_an_instance_of(TwoPlayer)
+      allow(Interface).to receive(:ask_game_type) {TwoPlayer.new}
+     expect(@x.setup).to be_an_instance_of(TwoPlayer)
    end
   
    it "should have an option to play with 2 computers" do
-     expect(@x.setup("Two Computer")).to be_an_instance_of(TwoComputer)
+      allow(Interface).to receive(:ask_game_type) {TwoComputer.new}
+     expect(@x.setup).to be_an_instance_of(TwoComputer)
    end
   
    it "should complete a vertical match" do
-       @x.pick("y", 1)
-       @x.pick("y", 7)
+       @x.pick(:player1, 1)
+       @x.pick(:player1, 7)
        expect(Intelligence.choose_move(@x.board)).to eq(4)
    end
 
