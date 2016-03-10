@@ -6,10 +6,10 @@ module Interface
 
   def self.get_symbol
     x = gets.chomp
-    if x =~ /\w{1}/
+    if x =~ /\A[a-zA-Z]{1}\z/
       x
     else
-      puts "The symbol must be one letter character. Please try again."
+      puts "The symbol must be one letter character. Please try again." #is this loop even working?
       ask_symbol(@player)
     end
   end
@@ -21,12 +21,20 @@ module Interface
   end
 
   def self.determine_order
-    puts "Who would you like to go first?" #refactor to include correct names?
+    puts "Who would you like to go first? Please press 1 for the #{name(:player1)} and 2 for the #{name(:player2)}."
     get_order
   end
 
   def self.get_order
-    gets.chomp
+    x = gets.chomp
+    if x == 1
+      :player1
+    elsif x == 2
+      :player2
+    else
+      puts "Whoa, wrong answer!"
+      determine_order
+    end
   end
 
   def self.display_board(x)
@@ -34,6 +42,13 @@ module Interface
     y
   end
 
+  def self.name(player)
+    if player == :player1
+      "first player"
+    elsif player == :player2
+      "second player"
+    end
+  end
+
 end
 
-Interface.ask_symbol("k")

@@ -11,8 +11,8 @@ class Game
   attr_reader :board
 
   def initialize
-    @player1 = choose_symbol(player1, "X")
-    @player2 = choose_symbol(player2, "0")
+    @player1 = choose_symbol(player1, symbol="X")
+    @player2 = choose_symbol(player2, symbol="0")
     @board = Board.new
   end
 
@@ -41,9 +41,16 @@ class SinglePlayer < Game
   def initialize
     @player2 = Computer.new("O")
   end
+
+   # @player1.name = name || "the human"
+   # @player2.name = name || "the computer"
+
 end
 
 class TwoPlayer < Game
+
+ # @player1.name = name || "first human"
+ # @player2.name = name || "second human"  
 
 end
 
@@ -52,6 +59,9 @@ class TwoComputer < Game
   def initialize
     @player1 = Computer.new("X")
     @player2 = Computer.new("O")
-  end
+  end 
 
+ #   @player1.name = "the first computer"
+ #   @player2.name = "the second computer"
+ 
 end

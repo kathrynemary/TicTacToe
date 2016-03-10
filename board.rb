@@ -1,6 +1,3 @@
-
-require_relative './tictactoe'
-
 class Board
 
   attr_reader :board
