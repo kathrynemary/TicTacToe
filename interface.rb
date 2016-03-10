@@ -26,7 +26,7 @@ module Interface
     get_order
   end
 
-  def self.get_order
+  def get_order
     x = gets.chomp
     if x == 1
       puts "you chose player 1!"
@@ -41,12 +41,6 @@ module Interface
   end
 
   def self.display_board(x)
-    x.each do |key|
-      if x[key].instance_of? Player
-        puts "replacing #{x[key]} with the player's symbol."
-        x[key] = key.symbol
-      end
-    end
     y = "\n#{x.fetch(0)} | #{x.fetch(1)} | #{x.fetch(2)}\n#{x.fetch(3)} | #{x.fetch(4)} | #{x.fetch(5)}\n#{x.fetch(6)} | #{x.fetch(7)} | #{x.fetch(8)}\n"
     y
   end
