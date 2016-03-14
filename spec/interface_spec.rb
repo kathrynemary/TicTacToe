@@ -31,9 +31,9 @@ describe Interface do
 
   #this isn't working...
   it "should have a name for each player in 2-player" do
-    allow(Interface).to receive(:ask_game_type) {"Two Player"}	  
-    expect(Interface.name(:player1)).to eql("first human")
-    expect(Interface.name(:player2)).to eql("second human")
+    allow(Interface).to receive(:game_type) {1}	  
+    expect(Interface.name(:player1)).to eq("first human")
+    expect(Interface.name(:player2)).to eq("second human")
   end
 =begin
   it "should have a name for each player in a 1-player game" do

@@ -10,6 +10,7 @@ class Game
   attr_reader :player1
   attr_reader :player2
   attr_reader :board
+  attr_reader :winner
 
   def initialize
     @player1 = choose_symbol(player1)
@@ -28,6 +29,19 @@ class Game
 
   def pick(player, space)
     @board.pick(player, space)
+    game_over(player)
+  end
+
+  def check_winner(player)
+    puts "#{player} has won!"
+    @winner = player
+  end
+
+  def game_over
+    if @board.winner?(player)
+      puts "Game over!"
+      check_winner(player)
+    end
   end
 
 end
@@ -36,6 +50,7 @@ class SinglePlayer < Game
 
   def initialize
     @player2 = Computer.new("O")
+    puts "I have started a new SinglePlayer game!"
   end
 
 end
