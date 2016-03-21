@@ -34,12 +34,15 @@ class Session
 
   def self.evaluate_answer(answer)
     if answer == "Y"
-      #new game of same subtype
-      #(game.class).new
-      #don't ask what player should be called again, just ask for who goes 1st.
+      new_game   
     else
       exit_session
     end
+  end
+
+  def self.new_game
+    Interface.game_variety
+    monitor_game 
   end
 
   def self.score(player)

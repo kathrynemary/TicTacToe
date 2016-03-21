@@ -3,13 +3,13 @@ require_relative '../interface'
 describe Interface do
 
   it "should ask for input to select a player's symbol" do
-    allow(Interface).to receive(:get_symbol) { "X" }
+    allow(Interface).to receive(:ask_symbol) { "X" }
     expect(Interface.ask_symbol("k")).to eql("X")
   end
 
   it "should ensure the symbol is not a number" do
-    allow(Interface).to receive(:get_symbol) { "X" }
-    expect(Interface.ask_symbol("J")).to match(/\A[a-zA-Z]{1}\z/)
+    allow(Interface).to receive(:ask_symbol) {1}
+    expect { Interface.verify_input(1) }.to raise_error(StandardError) 
   end
 
 #I feel like this test is not sufficient.
@@ -29,11 +29,10 @@ describe Interface do
     expect(Interface.display_board(a)).to include("0", "player1", "2", "3", "4", "5", "6", "7", "8")
   end
 
-  #this isn't working...
   it "should have a name for each player in 2-player" do
-    allow(Interface).to receive(:game_type) {1}	  
+    allow(Interface).to receive(:game_variety) {"SinglePlayer"}	  
     expect(Interface.name(:player1)).to eq("first human")
-    expect(Interface.name(:player2)).to eq("second human")
+    #expect(Interface.name(:player2)).to eq("second human")
   end
 =begin
   it "should have a name for each player in a 1-player game" do

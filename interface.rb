@@ -4,22 +4,26 @@ require_relative './game'
 module Interface
 
   attr_reader :player1, :player2, :board, :symbol
-  attr_reader :game_variety
+  attr_reader :game_variety, :player
 
   def self.ask_symbol(player)
-    @player = player
     puts "What symbol do you want to use for #{player}?"
-    @symbol = get_symbol
+    @player = player
+    x = gets.chomp
+    verify_input(x) 
   end
 
-  def self.get_symbol
-    x = gets.chomp
+  def self.verify_input(x)
     if x =~ /\A[a-zA-Z]{1}\z/
       x
- #   else
- #     puts "The symbol must be one letter character. Please try again." #is this loop even working?
-#      ask_symbol(@player)
+    else
+      invalid_input
     end
+  end
+
+  def self.invalid_input
+    raise StandardError.new("The symbol must be one letter character. Please try again.")
+    ask_symbol(:player)
   end
 
   def self.determine_order
@@ -27,8 +31,8 @@ module Interface
     get_order
   end
 
-  def get_order
-    order_input
+  def self.get_order
+    x = order_input
     if x == 1
       puts "you chose player 1!"
       :player1
@@ -41,7 +45,7 @@ module Interface
     end
   end
 
-  def order_input
+  def self.order_input
     gets.chomp
   end
 
@@ -51,7 +55,7 @@ module Interface
     y
   end
 
-  def self.name(player)
+  def self.name(player) #returning a hash, not a single value
     if @game_variety == SinglePlayer
       {:player1 => "you", :player2 => "the computer"}
     elsif @game_variety == TwoPlayer
@@ -60,7 +64,7 @@ module Interface
       {:player1 => "the first computer", :player2 => "the second computer"} 
     end
   end
-  
+
   def self.game_type(type)
     if type == 1
       @game_variety = SinglePlayer.new
@@ -72,17 +76,35 @@ module Interface
     puts "I've updated game_type!"
   end
 
+  def self.game_variety
+    @game_variety
+  end
+
   def self.ask_game_type
     puts "Would you like to have a 1-player game(1), a 2-player game(2), or have 2 computers play each other(3)?"
     answer = gets.chomp
-    if answer == "Single Player"
+    verify_game_type(answer)
+  end
+
+  def self.verify_game_type(answer)
+    if answer == "1"
       game_type(1)
-    elsif answer == "Two Player"
-      game_type(2)
-    elsif answer == "Two Computer"
-      game_type(3)
-    end #put in an error if incorrect input
-  @game_variety
+    elsif answer == "2"
+      game_type(2)   
+    elsif answer == "3"
+      game_type(3) 
+    else
+      puts "Invalid answer! Try again."
+      ask_game_type
+    end
+    @game_variety
+  end
+
+  def self.ask_space
+    puts "What space do you want to pick?"
+    #display_board(board)
+    answer = gets#.chomp
+    answer #gotta make this better
   end
 
 end

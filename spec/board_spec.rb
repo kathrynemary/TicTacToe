@@ -42,15 +42,15 @@ describe Board do
 
   it "should identify a tied game" do
     @x.pick(:player1, 0)
-    @x.pick(:player1, 1)
+    @x.pick(:player2, 1)
     @x.pick(:player1, 2)
-    @x.pick(:player1, 3)
+    @x.pick(:player2, 3)
     @x.pick(:player1, 4)
-    @x.pick(:player1, 5)
+    @x.pick(:player2, 5)
     @x.pick(:player1, 6)
-    @x.pick(:player1, 7)
+    @x.pick(:player2, 7)
     @x.pick(:player1, 8)
-    expect(@x.winner?(:player1)).to eq("tie")
+    expect(@x.winner?(:player1)).to eq(true)
   end
 
   it "should identify when a player picks a spot" do

@@ -28,41 +28,50 @@ class Board
   end
 
   def winner?(symbol)
+    if actual_winner?(symbol) || tie?
+      true
+    else
+      false
+    end
+  end
+
+  def actual_winner?(symbol)
     taken = @board.select {|key, value| value == symbol}
     if taken.has_key?(0)
       if taken.has_key?(1) && taken.has_key?(2)
-        row = true
+        @row = true
       elsif taken.has_key?(4) && taken.has_key?(8)
-        row = true
+        @row = true
       elsif taken.has_key?(3) && taken.has_key?(6)
-        row = true
+        @row = true
       end
     elsif taken.has_key?(1) && taken.has_key?(7) && taken.has_key?(4)
-      row = true
+      @row = true
     elsif taken.has_key?(2)
       if taken.has_key?(5) && taken.has_key?(8)
-        row = true
+        @row = true
       elsif taken.has_key?(4) && taken.has_key?(6)
-        row = true
+        @row = true
       end
     elsif taken.has_key?(3) && taken.has_key?(4) && taken.has_key?(5)
-      row = true
+      @row = true
     elsif taken.has_key?(6) && taken.has_key?(7) && taken.has_key?(8)
-      row = true
+      @row = true
     else
-      row = false
+      @row = false
     end
-
-    if row == true
+  end
+    
+  def tie?
+    if @row == true
       if available_spaces.empty?
-        "tie"
-      else
         true
+      else
+        false
       end
     else
       false
     end
-
   end
 
 end

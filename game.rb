@@ -1,46 +1,52 @@
-require_relative './tictactoe'
 require_relative './player'
 require_relative './board'
 require_relative './computer'
-require_relative './Intelligence'
 require_relative './interface'
+require_relative './game_builder'
 
 class Game
-
-  attr_reader :player1
-  attr_reader :player2
-  attr_reader :board
-  attr_reader :winner
+  
+  attr_reader :board, :symbol, :player1, :player2, :game, :first_player, :other_player
 
   def initialize
-    @player1 = choose_symbol(player1)
-    @player2 = choose_symbol(player2)
+    GameBuilder.new 
     @board = Board.new
+#    game_play
   end
 
-  def choose_symbol(player)
-    symbol = Interface.ask_symbol(player)
-    player = Player.new(symbol)
+  def game_play
+    until game_over(first_player)
+      play_a_turn(first_player)
+      game_over(first_player)
+      play_a_turn(other_player)
+      game_over(other_player)
+    end
   end
-
-  def setup
-    Interface.ask_game_type
+  
+  def play_a_turn(player)
+    space = Interface.ask_space
+    pick(player, space)   
   end
 
   def pick(player, space)
     @board.pick(player, space)
-    game_over(player)
   end
 
   def check_winner(player)
-    puts "#{player} has won!"
-    @winner = player
+    if @board.tie? == false
+      puts "#{player} has won!"
+      @winner = player
+    else
+      puts "There was a tie!"
+    end
   end
 
-  def game_over
+  def game_over(player)
     if @board.winner?(player)
       puts "Game over!"
       check_winner(player)
+    else
+      puts "game not over yet"
     end
   end
 
