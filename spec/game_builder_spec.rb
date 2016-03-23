@@ -5,12 +5,31 @@ require_relative '../player'
 describe GameBuilder do
     #stub in what values it receives and then check that it instantiates a thing w/ those values.
 
-  it "should set up the game" do
+  it "should be able toset up a single-player game" do
+    example = GameBuilder.new
+    allow(example).to receive(@player1) {"W"}
+    allow(example).to receive(@player2) {"T"}
+    allow(example).to receive(:game_setup) {1}
+    allow(example).to receive(:get_first_player) {:player1}
+    expect(example.game).to be_an_instance_of(SinglePlayer)
+  end
+
+end
+
+
+
+
+
+
+
+
+
+=begin
     allow(Interface).to receive(:ask_game_type) {1}
     allow(Interface).to receive(:ask_symbol) {"X"}
     allow(Interface).to receive(:first_player) {player1}
     allow(Interface).to receive(:order_input) {1}
-    expect(GameBuilder.game).to be_an_instance_of(SinglePlayer)  
+    expect(GameBuilder.game(1)).to be_an_instance_of(SinglePlayer)  
   end
 
   it "should get a symbol for the first player" do
@@ -18,9 +37,9 @@ describe GameBuilder do
     allow(Interface).to receive(:ask_symbol) { "X" }
     allow(Interface).to receive(:first_player) {player1}
     allow(Interface).to receive(:order_input) {1}
-    expect(GameBuilder.new.player1.symbol).to eq(Player.new("X").symbol)
+    expect(GameBuilder.symbol(:player1)).to eq(Player.new("X").symbol)
   end
-
+=begin
   it "should get a symbol for the second player" do
     allow(Interface).to receive(:ask_game_type) {"1"}
     allow(Interface).to receive(:ask_symbol) { "Y" }
@@ -115,6 +134,6 @@ end
    it "should have player2 be a computer" do
      expect(@y.player2).to be_an_instance_of(Computer)
    end
+end
 =end
- end
 

@@ -1,22 +1,6 @@
-require_relative '../interface'
+require_relative '../Interface/interface'
 
 describe Interface do
-
-  it "should ask for input to select a player's symbol" do
-    allow(Interface).to receive(:ask_symbol) { "X" }
-    expect(Interface.ask_symbol("k")).to eql("X")
-  end
-
-  it "should ensure the symbol is not a number" do
-    allow(Interface).to receive(:ask_symbol) {1}
-    expect { Interface.verify_input(1) }.to raise_error(StandardError) 
-  end
-
-#I feel like this test is not sufficient.
-  it "should get the first player" do
-    allow(Interface).to receive(:determine_order) {:player1}
-    expect(Interface.determine_order).to eql(:player1)
-  end
 
   it "should display the board" do
     a = Board.new.board
@@ -29,17 +13,4 @@ describe Interface do
     expect(Interface.display_board(a)).to include("0", "player1", "2", "3", "4", "5", "6", "7", "8")
   end
 
-  it "should have a name for each player in 2-player" do
-    allow(Interface).to receive(:game_variety) {"SinglePlayer"}	  
-    expect(Interface.name(:player1)).to eq("first human")
-    #expect(Interface.name(:player2)).to eq("second human")
-  end
-=begin
-  it "should have a name for each player in a 1-player game" do
-    x = SinglePlayer.new
-     
-    expect(Interface.name(:player1)).to eq("you")
-    expect(Interface.name(:player2)).to eq("the computer")
-  end
-=end
 end
