@@ -1,7 +1,8 @@
 require_relative '../Interface/game_builder_order_interface'
+require_relative '../errors'
 
 describe OrderInterface do
-  
+
   it "gets the order for the players if 1st player is 1st" do 
     allow(OrderInterface).to receive(:first_player) {:player1}
     expect(OrderInterface.first_player).to eq(:player1) 
@@ -19,11 +20,14 @@ describe OrderInterface do
   end
 
   it "won't let you pick a bad thing for player order" do 
-    expect { OrderInterface.get_first_player("x") }.to raise_error(Errors::StandardError::InputError) 
+    expect { OrderInterface.get_first_player("x") }.to raise_error(Errors::InputError) 
+  end
+ 
+  it "to put player1 as 1st player when 1 is picked" do
+    OrderInterface.get_first_player("1") 
+    expect(OrderInterface.first_player).to eq(:player1)
   end
 
 end
 
-#it won't let you do a wrong answer
 #it knows the players names(?)
-#change required input to just 1 or 2

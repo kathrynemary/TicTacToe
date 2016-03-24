@@ -1,4 +1,5 @@
 require_relative 'Interface/interface'
+require_relative 'Interface/game_builder_game_type_interface'
 require_relative './game'
 
 class GameBuilder
@@ -25,16 +26,16 @@ class GameBuilder
     @symbol = Interface.ask_symbol(player)
     player = Player.new(symbol)
   end
-=begin
+
   def game_setup
-    result = Interface.ask_game_type
+    result = GameTypeInterface.ask_game_type
     game(result)
   end
 
   def self.game(type)
     @game = Interface.verify_game_type(type)
   end
-=end  
+
   def self.symbol(player)
     player.symbol
   end

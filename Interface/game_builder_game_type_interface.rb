@@ -1,20 +1,11 @@
-require_relative './board'
-require_relative './game'
+require_relative '../board'
+require_relative '../game'
+require_relative '../errors'
 
 class GameTypeInterface
 
-  attr_reader :player1, :player2, :board, :symbol
-  attr_reader :game_variety, :player
-
-  def self.name(player) #returning a hash, not a single value
-    if @game_variety == SinglePlayer
-      {:player1 => "you", :player2 => "the computer"}
-    elsif @game_variety == TwoPlayer
-      {:player1 => "the first human", :player2 => "the second human"}
-    elsif @game_variety == TwoComputer  
-      {:player1 => "the first computer", :player2 => "the second computer"} 
-    end
-  end
+  attr_reader :player1, :player2, :symbol
+  attr_reader :game_variety, :player_names
 
   def self.game_type(type)
     if type == 1
@@ -24,7 +15,6 @@ class GameTypeInterface
     elsif type == 3
       @game_variety = TwoComputer.new
     end
-    puts "I've updated game_type!"
   end
 
   def self.game_variety
@@ -45,10 +35,24 @@ class GameTypeInterface
     elsif answer == "3"
       game_type(3) 
     else
-      puts "Invalid answer! Try again."
-      ask_game_type
+      raise Errors::InputError.new("this is a bad answer.")
     end
     @game_variety
+  end
+  
+  def self.player_names
+    if @game_variety.instance_of? SinglePlayer
+      @player_names = {:player1 => "you", :player2 => "the computer"}
+    elsif @game_variety.instance_of? TwoPlayer
+      @player_names = {:player1 => "the first human", :player2 => "the second human"}
+    elsif @game_variety.instance_of? TwoComputer  
+      @player_names = {:player1 => "the first computer", :player2 => "the second computer"}
+    end
+    @player_names
+  end
+
+  def self.name(player)
+    @player_names[player]
   end
 
 end

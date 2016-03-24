@@ -9,7 +9,7 @@ class Game
   attr_reader :board, :symbol, :player1, :player2, :game, :first_player, :other_player
 
   def initialize
-    GameBuilder.new 
+#    GameBuilder.new 
     @board = Board.new
 #    game_play
   end

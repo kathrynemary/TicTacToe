@@ -5,17 +5,33 @@ require_relative '../errors'
 
 class OrderInterface
 
-  def self.get_first_player(input)
-    puts "what is the 1st player?"
-    raise Errors::InputError.new("this is a bad answer.") unless correct_player?
-    @first_player = input
+  def self.ask_first_player
+    puts "what is the 1st player? 1 or 2"
+    answer = gets.chomp
+    get_first_player(answer)
   end
 
-  def self.correct_player?
-    @first_player =~ /:player1|:player2/
+  def self.get_first_player(input) 
+    puts "now in get_first_player"
+    @input = input
+    raise Errors::InputError.new("this is a bad answer.") unless correct_player?
+    translate_input(input)
+  end
+
+  def self.translate_input(input) 
+    if input =~ /1/
+      @first_player = :player1
+    else
+      @first_player = :player2
+    end
+  end
+
+  def self.correct_player?  
+    @input =~ /1|2/
   end
 
   def self.first_player
+    puts "now using first player"
     @first_player
   end	
 
