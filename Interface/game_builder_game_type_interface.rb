@@ -1,59 +1,10 @@
 require_relative './board'
 require_relative './game'
 
-module Interface
+class GameTypeInterface
 
   attr_reader :player1, :player2, :board, :symbol
   attr_reader :game_variety, :player
-
-  def self.ask_symbol(player)
-    puts "What symbol do you want to use for #{player}?"
-    @player = player
-    x = gets.chomp
-    verify_input(x) 
-  end
-
-  def self.verify_input(x)
-    if x =~ /\A[a-zA-Z]{1}\z/
-      x
-    else
-      invalid_input
-    end
-  end
-
-  def self.invalid_input
-    raise StandardError.new("The symbol must be one letter character. Please try again.")
-    ask_symbol(:player)
-  end
-
-  def self.determine_order
-    puts "Who would you like to go first? Please press 1 for the #{name(:player1)} and 2 for the #{name(:player2)}."
-    get_order
-  end
-
-  def self.get_order
-    x = order_input
-    if x == 1
-      puts "you chose player 1!"
-      :player1
-    elsif x == 2
-      puts "you chose player 2!"
-      :player2
-    else #idk if this works
-      puts "Whoa, wrong answer!"
-      determine_order
-    end
-  end
-
-  def self.order_input
-    gets.chomp
-  end
-
-
-  def self.display_board(x)
-    y = "\n#{x.fetch(0)} | #{x.fetch(1)} | #{x.fetch(2)}\n#{x.fetch(3)} | #{x.fetch(4)} | #{x.fetch(5)}\n#{x.fetch(6)} | #{x.fetch(7)} | #{x.fetch(8)}\n"
-    y
-  end
 
   def self.name(player) #returning a hash, not a single value
     if @game_variety == SinglePlayer
@@ -100,11 +51,5 @@ module Interface
     @game_variety
   end
 
-  def self.ask_space
-    puts "What space do you want to pick?"
-    #display_board(board)
-    answer = gets#.chomp
-    answer #gotta make this better
-  end
-
 end
+
