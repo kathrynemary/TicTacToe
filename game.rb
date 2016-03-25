@@ -1,7 +1,11 @@
 require_relative './player'
 require_relative './board'
 require_relative './computer'
-require_relative 'Interface/interface'
+require_relative 'Interface/display_board_interface'
+require_relative './game_builder'
+require_relative 'Interface/game_builder_symbol_interface'
+require_relative 'Interface/game_builder_game_type_interface'
+require_relative 'Interface/game_builder_order_interface'
 require_relative './game_builder'
 
 class Game

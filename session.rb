@@ -1,6 +1,6 @@
 require_relative './board'
 require_relative './game'
-require_relative './interface'
+require_relative './Interface/display_board_interface'
 
 class Session
 

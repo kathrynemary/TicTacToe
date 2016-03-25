@@ -1,46 +1,37 @@
-require_relative 'Interface/interface'
+require_relative 'Interface/display_board_interface'
 require_relative 'Interface/game_builder_game_type_interface'
-require_relative './game'
+require_relative 'Interface/game_builder_order_interface'
 
-class GameBuilder
+class GameBuilder 
 
-  attr_reader :symbol, :player1, :player2, :game, :first_player, :other_player
-
-  def initialize
-    game_setup 
-    @player1 = choose_symbol(:player1)
-    @player2 = choose_symbol(:player2)
-    get_first_player
+  def self.game_setup
+    GameTypeInterface.run 
   end
 
-  def get_first_player
-    @first_player = Interface.get_order
-    if @first_player == player1
-      @other_player = player2
-    else
-      @other_player = player1
-    end
+  def self.game_symbols
+    SymbolInterface.order_of_operations
+    player1symbol
+    player2symbol 
+  end
+
+  def self.player1symbol
+    SymbolInterface.player1symbol
   end
   
-  def choose_symbol(player)
-    @symbol = Interface.ask_symbol(player)
-    player = Player.new(symbol)
+  def self.player2symbol
+    SymbolInterface.player2symbol
   end
 
-  def game_setup
-    result = GameTypeInterface.ask_game_type
-    game(result)
+  def self.get_order
+    OrderInterface.ask_first_player
   end
 
-  def self.game(type)
-    @game = Interface.verify_game_type(type)
+  def self.first_player
+    OrderInterface.first_player
   end
 
-  def self.symbol(player)
-    player.symbol
+  def self.second_player
+    OrderInterface.second_player
   end
 
 end
-
-
-

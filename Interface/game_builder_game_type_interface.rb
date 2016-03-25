@@ -7,6 +7,11 @@ class GameTypeInterface
   attr_reader :player1, :player2, :symbol
   attr_reader :game_variety, :player_names
 
+  def self.run
+    input = ask_game_type
+    game_type(input)
+  end
+
   def self.game_type(type)
     if type == 1
       @game_variety = SinglePlayer.new
@@ -40,7 +45,7 @@ class GameTypeInterface
     @game_variety
   end
   
-  def self.player_names
+  def self.set_player_names
     if @game_variety.instance_of? SinglePlayer
       @player_names = {:player1 => "you", :player2 => "the computer"}
     elsif @game_variety.instance_of? TwoPlayer
@@ -48,11 +53,11 @@ class GameTypeInterface
     elsif @game_variety.instance_of? TwoComputer  
       @player_names = {:player1 => "the first computer", :player2 => "the second computer"}
     end
-    @player_names
   end
 
   def self.name(player)
-    @player_names[player]
+    set_player_names
+    @player_names.fetch(player)
   end
 
 end

@@ -1,7 +1,7 @@
 require_relative '../board'
 require_relative '../game'
 
-class Interface
+class DisplayBoardInterface
 
   attr_reader :player1, :player2, :board, :symbol
   attr_reader :game_variety, :player
@@ -15,7 +15,7 @@ class Interface
     puts "What space do you want to pick?"
     display_board(board)
     answer = gets.chomp
-    answer #gotta make this better
+    answer
   end
 
 end

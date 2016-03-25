@@ -1,7 +1,4 @@
-require_relative '../board'
-require_relative '../game'
 require_relative '../errors'
-#require_relative '../Interface/game_builder_game_type_interface'
 
 class OrderInterface
 
@@ -12,13 +9,14 @@ class OrderInterface
   end
 
   def self.get_first_player(input) 
-    puts "now in get_first_player"
+    puts "getting input" #delete this
     @input = input
     raise Errors::InputError.new("this is a bad answer.") unless correct_player?
     translate_input(input)
   end
 
   def self.translate_input(input) 
+    puts "translating input"  #delete this later
     if input =~ /1/
       @first_player = :player1
     else
@@ -31,7 +29,7 @@ class OrderInterface
   end
 
   def self.first_player
-    puts "now using first player"
+    puts @first_player #delete this later
     @first_player
   end	
 

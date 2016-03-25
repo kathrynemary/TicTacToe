@@ -1,17 +1,11 @@
-require_relative '../player'
-require_relative '../board'
 require_relative '../game'
-require_relative '../computer'
-require_relative '../Intelligence'
-
 
 describe Game do
 
   before :each do
-    allow(Interface).to receive(:ask_game_type) {"Single Player"}
-    allow(Interface).to receive(:ask_symbol) {"X"}
-    allow(Interface).to receive(:first_player) {player1}
-    allow(Interface).to receive(:order_input) {1} 
+    allow(GameTypeInterface).to receive(:ask_game_type) {"Single Player"}
+    allow(SymbolInterface).to receive(:first_player) {player1}
+    allow(OrderInterface).to receive(:order_input) {1} 
   end
 
    it "should summon an instance of board" do
@@ -56,13 +50,5 @@ describe Game do
    it "should pick spaces with the correct symbol" do 
      expect(Game.new.pick(:player1, 0)).to eq(Board.new.pick(:player1, 0))
    end
-
-  
-  it "should complete a vertical match" do
-    example = Game.new
-    example.pick(:player1, 1)
-    example.pick(:player1, 7)
-    expect(Intelligence.choose_move(example.board)).to eq(4)
-  end
 
 end

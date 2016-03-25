@@ -1,5 +1,5 @@
 require_relative '../session'
-require_relative '../interface'
+require_relative '../Interface/display_board_interface'
 
 describe Session do
 =begin  

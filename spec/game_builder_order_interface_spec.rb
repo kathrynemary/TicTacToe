@@ -1,5 +1,4 @@
 require_relative '../Interface/game_builder_order_interface'
-require_relative '../errors'
 
 describe OrderInterface do
 
@@ -30,4 +29,3 @@ describe OrderInterface do
 
 end
 
-#it knows the players names(?)

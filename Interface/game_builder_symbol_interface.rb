@@ -4,9 +4,9 @@ require_relative '../errors'
 
 class SymbolInterface
 
-  attr_reader :player1, :player2, :symbol 
+  attr_reader :player1, :player2, :symbol
   
-  def order_of_operations #not sure how to test this
+  def self.order_of_operations
     symbol = ask_symbol(:player1)
     assign_player1_symbol(symbol)
     symbol2 = ask_symbol(:player2)
@@ -38,9 +38,17 @@ class SymbolInterface
   def self.assign_player1_symbol(symbol)
      @player1symbol = symbol
   end
-  
+ 
+  def self.player1symbol
+    @player1symbol
+  end
+
   def self.assign_player2_symbol(symbol)
     @player2symbol = symbol
+  end
+
+  def self.player2symbol
+    @player2symbol
   end
 
   def self.check_equality
