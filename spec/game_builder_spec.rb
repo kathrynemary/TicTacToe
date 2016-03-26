@@ -25,12 +25,17 @@ describe GameBuilder do
     expect(GameBuilder.player2symbol).to eq("O")
   end
 
-  it "should allow you to select player1 as the 1st player" do
-    allow(OrderInterface).to receive(:ask_first_player) {1}
-    GameBuilder.get_order
+  it "should allow you to select player1 as the 1st player" do 
+    allow(OrderInterface).to receive(:first_player_answer) {"1"}
+    GameBuilder.get_order 
     expect(GameBuilder.first_player).to eq(:player1)    
+  end
+  
+  it "should allow you to select player2 as the 1st player" do 
+    allow(OrderInterface).to receive(:first_player_answer) {"2"}
+    GameBuilder.get_order 
+    expect(GameBuilder.first_player).to eq(:player2)    
   end
 
 end
 
-#it should get the game's order for player1 or player2 to go 1st
