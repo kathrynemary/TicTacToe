@@ -1,4 +1,5 @@
 require_relative '../errors'
+require_relative './game_builder_game_type_interface'
 
 class OrderInterface
 
@@ -7,9 +8,13 @@ class OrderInterface
     get_first_player(answer)
   end
 
-  def self.first_player_answer #use correct names for players
-    puts "what is the 1st player? 1 or 2"
+  def self.first_player_answer
+    puts first_player_text
     answer = gets.chomp
+  end
+
+  def self.first_player_text	  
+    "what is the 1st player? #{GameTypeInterface.name(:player1)} or #{GameTypeInterface.name(:player2)}"
   end
 
   def self.get_first_player(input)

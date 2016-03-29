@@ -1,4 +1,5 @@
 require_relative '../Interface/game_builder_order_interface'
+require_relative '../Interface/game_builder_game_type_interface'
 
 describe OrderInterface do
 
@@ -26,6 +27,41 @@ describe OrderInterface do
     OrderInterface.get_first_player("1") 
     expect(OrderInterface.first_player).to eq(:player1)
   end
+  
+  it "should call player1 'the second human' in a SinglePlayer game" do
+    GameTypeInterface.game_type(1)
+    GameTypeInterface.game_variety 
+    expect(OrderInterface.first_player_text).to include("you")
+  end
+  
+  it "should call player2 'the second human' in a SinglePlayer game" do
+    GameTypeInterface.game_type(1)
+    GameTypeInterface.game_variety 
+    expect(OrderInterface.first_player_text).to include("the computer")
+  end
+
+  it "should call player1 'the second human' in a TwoPlayer game" do
+    GameTypeInterface.game_type(2)
+    GameTypeInterface.game_variety 
+    expect(OrderInterface.first_player_text).to include("the first human")
+  end
+
+  it "should call player2 'the second human' in a TwoPlayer game" do
+    GameTypeInterface.game_type(2)
+    GameTypeInterface.game_variety 
+    expect(OrderInterface.first_player_text).to include("the second human")
+  end
+ 
+  it "should call player1 'the first computer' in a TwoComputer game" do
+    GameTypeInterface.game_type(3)
+    GameTypeInterface.game_variety 
+    expect(OrderInterface.first_player_text).to include("the first computer")
+  end
+  
+  it "should call player2 'the second computer' in a TwoComputer game" do
+    GameTypeInterface.game_type(3)
+    GameTypeInterface.game_variety
+    expect(OrderInterface.first_player_text).to include("the second computer")
+  end
 
 end
-
