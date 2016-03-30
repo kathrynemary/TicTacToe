@@ -1,21 +1,26 @@
 require_relative '../board'
 require_relative '../game'
 require_relative '../errors'
+require_relative './game_builder_game_type_interface'
 
 class SymbolInterface
 
   attr_reader :player1, :player2, :symbol
   
   def self.order_of_operations
-    symbol = ask_symbol(:player1)
+    symbol = get_symbol(:player1)
     assign_player1_symbol(symbol)
-    symbol2 = ask_symbol(:player2)
+    symbol2 = get_symbol(:player2)
     assign_player2_symbol(symbol2)
     check_equality
   end
 
   def self.ask_symbol(player)
-    puts "What symbol do you want to use for #{player}?"
+    "What symbol do you want to use for #{GameTypeInterface.name(player)}?" 
+  end
+
+  def self.get_symbol(player)
+    puts ask_symbol(player)
     @player = player
     x = gets.chomp
     verify_input(x) 

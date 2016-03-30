@@ -1,4 +1,5 @@
 require_relative '../Interface/game_builder_symbol_interface'
+require_relative '../Interface/game_builder_game_type_interface'
 
 describe SymbolInterface do
 
@@ -26,6 +27,42 @@ describe SymbolInterface do
     SymbolInterface.assign_player1_symbol("X")
     SymbolInterface.assign_player2_symbol("X")
     expect { SymbolInterface.check_equality }.to raise_error(Errors::InputError)
+  end
+
+  it "should call player1 'the second human' in a SinglePlayer game" do
+    GameTypeInterface.game_type(1)
+    GameTypeInterface.game_variety 
+    expect(SymbolInterface.ask_symbol(:player1)).to include("you")
+  end
+  
+  it "should call player2 'the second human' in a SinglePlayer game" do
+    GameTypeInterface.game_type(1)
+    GameTypeInterface.game_variety 
+    expect(SymbolInterface.ask_symbol(:player2)).to include("the computer")
+  end
+
+  it "should call player1 'the second human' in a TwoPlayer game" do
+    GameTypeInterface.game_type(2)
+    GameTypeInterface.game_variety 
+    expect(SymbolInterface.ask_symbol(:player1)).to include("the first human")
+  end
+
+  it "should call player2 'the second human' in a TwoPlayer game" do
+    GameTypeInterface.game_type(2)
+    GameTypeInterface.game_variety 
+    expect(SymbolInterface.ask_symbol(:player2)).to include("the second human")
+  end
+ 
+  it "should call player1 'the first computer' in a TwoComputer game" do
+    GameTypeInterface.game_type(3)
+    GameTypeInterface.game_variety 
+    expect(SymbolInterface.ask_symbol(:player1)).to include("the first computer")
+  end
+  
+  it "should call player2 'the second computer' in a TwoComputer game" do
+    GameTypeInterface.game_type(3)
+    GameTypeInterface.game_variety
+    expect(SymbolInterface.ask_symbol(:player2)).to include("the second computer")
   end
 
 end

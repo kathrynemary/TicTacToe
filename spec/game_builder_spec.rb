@@ -17,9 +17,9 @@ describe GameBuilder do
     expect(GameBuilder.game_setup).to be_an_instance_of(TwoComputer)
   end
 
-  it "should choose a symbol for player1" do
-    allow(SymbolInterface).to receive(:ask_symbol).with(:player1) {"X"} 
-    allow(SymbolInterface).to receive(:ask_symbol).with(:player2) {"O"} 
+  it "should choose a symbol for player1" do #this one isn't passing
+    allow(SymbolInterface).to receive(:get_symbol).with(:player1) {"X"} 
+    allow(SymbolInterface).to receive(:get_symbol).with(:player2) {"O"} 
     GameBuilder.game_symbols
     expect(GameBuilder.player1symbol).to eq("X")
     expect(GameBuilder.player2symbol).to eq("O")
