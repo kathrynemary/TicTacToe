@@ -14,9 +14,9 @@ describe Board do
     expect(@x.available_spaces.size).to be == 9
   end
 
-  it "should know the location of the unavailable space" do
+  it "should raise an error if an unavailable space is picked" do
     @x.pick(:player1, 1)
-    expect(@x.available_spaces).not_to include(1)
+    expect { @x.pick(:player1, 1) }.to raise_error(Errors::InputError)
   end
 
   it "should identify when there is a winner" do
@@ -63,11 +63,6 @@ describe Board do
     @x.pick("y", 4)
     @x.pick("y", 6)
     expect(@x.winner?("y")).to eq false
-  end
-
-  it "should not allow you to pick the same space twice" do
-    @x.pick("X", 1)
-    expect(@x.pick("O", 1)).to eq("Error!")
   end
 
 end

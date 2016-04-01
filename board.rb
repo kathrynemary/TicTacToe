@@ -1,3 +1,5 @@
+require_relative './errors'
+
 class Board
 
   attr_reader :board
@@ -15,12 +17,12 @@ class Board
       @board[key] = player
       @board
     else
-      "Error!"
+      raise Errors::InputError.new("Error! That space is not available.")
     end
   end
 
-  def exclude?(thing)
-    unless available_spaces.has_key? thing
+  def include?(thing)
+    if available_spaces.has_key? thing
       return true
     else
       return false

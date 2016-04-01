@@ -10,4 +10,14 @@ describe Player do
     expect(Player.new("Z").symbol).to eq("Z")
   end
 
+  it "should return the score" do
+    expect(Player.score).to eq(0)
+  end
+
+  it "should update the score twice" do
+    Player.update_score
+    Player.update_score
+    expect(Player.score).to eq(2) 
+  end
+
 end

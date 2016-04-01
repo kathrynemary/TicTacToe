@@ -1,25 +1,22 @@
 require_relative './board'
 require_relative './game'
 require_relative './Interface/display_board_interface'
+require_relative './player'
 
 class Session
 
   attr_reader :game, :winner
 
-  def initialize
-    @game = Interface.ask_game_type
-    #monitor_game
+  def self.game
+    @game = Game.new 
   end
 
-  def self.monitor_game
-    if @game.game_over
-      @winner = @game.winner
-      update_score
-      play_again?
-    end
+  def play_a_game
+    #@game = Game.new 
+    @game.play_again?
   end
-  
-  def self.play_again?
+ 
+  def play_again?
     puts "would you like to play again? y/n"
     answer = gets.chomp.upcase
     check_input(answer)
@@ -28,40 +25,41 @@ class Session
 
   def self.check_input(input)
     unless input.length == 1 && input == "Y" || input.length == 1 && input == "N"
-      puts "error!"
+      raise Errors::InputError.new("that input is bad")
     end
   end
 
-  def self.evaluate_answer(answer)
+  def evaluate_answer(answer)
     if answer == "Y"
-      new_game   
+      play_a_game   
     else
       exit_session
     end
   end
-
-  def self.new_game
-    Interface.game_variety
-    monitor_game 
-  end
-
+=begin
   def self.score(player)
     0
   end
 
- # def self.update_score
- #   score(winner) += 1
- # end
-
-  def self.display_score
-    player.each do |display|
-      puts "#{player}: #{score(player)}"
-    end
+  def add_score(player)
+    score(player) = 1
+    puts score(player)
   end
 
+  def update_score(winner)
+    puts winner
+    add_score(winner)
+  end
+=end
+#  def self.display_score
+#    player.each do |display|
+#      puts "#{player}: #{score(player)}"
+#    end
+#  end
 
-  def self.exit_session
-    display_score
+
+  def exit_session
+    #display_score
   end
 
 end
