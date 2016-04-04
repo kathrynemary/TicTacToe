@@ -2,19 +2,17 @@ require_relative './board'
 
 class Player
 
- # attr_reader :symbol
-
-  def initialize
-   # @symbol = symbol
+  def initialize 
     @score = 0
   end
 
-  def self.score
+=begin
+  def score
     @score.to_i
   end
 
-  def self.update_score
+  def update_score
     @score = @score.to_i + 1
   end
-
+=end
 end

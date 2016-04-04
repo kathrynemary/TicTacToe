@@ -38,7 +38,7 @@ class Game
   def self.check_winner(player)
     if @board.tie? == false
       puts "#{player} has won!"
-      player.udpate_score 
+      #player.update_score this isn't working. 
       @winner = player
     else
       puts "There was a tie!" #does this need to go elsewhere
@@ -56,21 +56,22 @@ end
 
 class SinglePlayer < Game
   def initialize
-    @player1 = Player.new
-    @player2 = Computer.new 
+    @player1 = Player
+    @player2 = Computer
   end
 end
 
 class TwoPlayer < Game
   def initialize
-    @player1 = Player.new
-    @player2 = Player.new
+    @player1 = Player
+    @player2 = Player
   end
 end
 
 class TwoComputer < Game
   def initialize
-    @player1 = Computer.new
-    @player2 = Computer.new
+    @player1 = Computer
+    @player2 = Computer
   end 
 end
+

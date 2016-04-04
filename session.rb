@@ -5,7 +5,12 @@ require_relative './player'
 
 class Session
 
-  attr_reader :game, :winner
+  attr_reader :game
+
+  def initialize
+    @game = Game.new
+    @game.game_play
+  end
 
   def self.game
     @game = Game.new 
@@ -15,7 +20,8 @@ class Session
     #@game = Game.new 
     @game.play_again?
   end
- 
+
+=begin 
   def play_again?
     puts "would you like to play again? y/n"
     answer = gets.chomp.upcase
@@ -57,10 +63,10 @@ class Session
 #    end
 #  end
 
-
   def exit_session
     #display_score
   end
 
 end
 
+#Session.new

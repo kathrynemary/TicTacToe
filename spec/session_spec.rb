@@ -18,7 +18,7 @@ describe Session do
   it "shouldn't let you put in bad input for a new game" do
     expect { Session.check_input("11") }.to raise_error(Errors::InputError)
   end
-  
+
 end
 
 #keeping track of the score
