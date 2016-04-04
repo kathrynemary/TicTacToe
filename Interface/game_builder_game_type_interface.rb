@@ -14,11 +14,11 @@ class GameTypeInterface
 
   def self.game_type(type)
     if type == 1
-      @game_variety = SinglePlayer.new
+      @game_variety = SinglePlayer
     elsif type == 2
-      @game_variety = TwoPlayer.new
+      @game_variety = TwoPlayer
     elsif type == 3
-      @game_variety = TwoComputer.new
+      @game_variety = TwoComputer
     end
   end
 
@@ -55,9 +55,10 @@ class GameTypeInterface
     end
   end
 
-  def self.name(player)
+  def self.get_player_names
     set_player_names
-    @player_names.fetch(player)
+    @player1_name = @player_names[:player1]
+    @player2_name = @player_names[:player2]
   end
 
 end

@@ -16,7 +16,8 @@ class SymbolInterface
   end
 
   def self.ask_symbol(player)
-    "What symbol do you want to use for #{GameTypeInterface.name(player)}?" 
+    #"What symbol do you want to use for #{GameTypeInterface.player1_name)}?" #this'll need to be fixed. 
+    puts "what symbol to use?"
   end
 
   def self.get_symbol(player)

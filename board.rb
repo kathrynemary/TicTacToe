@@ -5,7 +5,7 @@ class Board
   attr_reader :board
 
   def initialize
-    @board = {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8}
+    @board = {'0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8}
   end
 
   def available_spaces

@@ -14,7 +14,7 @@ class OrderInterface
   end
 
   def self.first_player_text	  
-    "what is the 1st player? #{GameTypeInterface.name(:player1)} or #{GameTypeInterface.name(:player2)}"
+    "what is the 1st player? 1 or 2?" #fix this later. #{GameTypeInterface.name(:player1)} or #{GameTypeInterface.name(:player2)}"
   end
 
   def self.get_first_player(input)

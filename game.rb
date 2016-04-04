@@ -5,24 +5,24 @@ require_relative './game_builder'
 require_relative 'Interface/game_builder_symbol_interface'
 require_relative 'Interface/game_builder_game_type_interface'
 require_relative 'Interface/game_builder_order_interface'
+require_relative './computer'
 
 class Game
   
   attr_reader :board, :player1, :player2, :game, :first_player, :second_player
 
   def initialize
-    GameBuilder.new 
     @first_player = GameBuilder.first_player
     @second_player = GameBuilder.second_player
     @board = Board.new
   end
 
   def game_play
-    until game_over(:first_player)
+    until game_over(:player1) || game_over(:player2)
       play_a_turn(:first_player)
-      game_over(:first_player)
+      #game_over(:first_player)
       play_a_turn(:second_player)
-      game_over(:second_player)
+      #game_over(:second_player)
     end
   end
   
@@ -46,7 +46,7 @@ class Game
   end
 
   def game_over(player)
-    if @board.winner?(player)
+    if Board.new.winner?(player)
       puts "Game over!"
       check_winner(player)
     end
@@ -74,4 +74,3 @@ class TwoComputer < Game
     @player2 = Computer
   end 
 end
-

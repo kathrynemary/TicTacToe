@@ -4,14 +4,24 @@ require_relative 'Interface/game_builder_order_interface'
 
 class GameBuilder 
 
-  def self.game_setup
+  def initialize
+    game_setup
+    game_symbols
+    get_order
+  end
+      
+  def game_setup
     GameTypeInterface.run 
   end
 
-  def self.game_symbols
+  def self.game_type
+    GameTypeInterface.game_variety.new
+  end
+
+  def game_symbols
     SymbolInterface.order_of_operations
-    player1symbol
-    player2symbol 
+    SymbolInterface.player1symbol
+    SymbolInterface.player2symbol 
   end
 
   def self.player1symbol
@@ -22,7 +32,7 @@ class GameBuilder
     SymbolInterface.player2symbol
   end
 
-  def self.get_order
+  def get_order
     OrderInterface.ask_first_player
   end
 
