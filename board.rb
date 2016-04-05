@@ -15,7 +15,7 @@ class Board
 
   def pick(player, key) 
     available_spaces
-    if available_spaces.has_key?(key) #extract to include?
+    if available_spaces.has_key?(key) #extract to different method?
       @board[key] = player
       @board
     else
@@ -23,14 +23,6 @@ class Board
     end
     puts DisplayBoardInterface.display_board(@board)
   end
-
-#  def self.include?(thing)
-#    if available_spaces.has_key? thing
-#      return true
-#    else
-#      return false
-#    end
-#  end
 
   def winner?(symbol)
     if actual_winner?(symbol) || tie?

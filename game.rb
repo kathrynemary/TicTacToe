@@ -9,19 +9,19 @@ require_relative './computer'
 
 class Game
   
-  attr_reader :board, :player1, :player2, :game, :first_player, :second_player
+  attr_reader :board, :player1, :player2, :game, :first_player_symbol, :second_player_symbol
 
   def initialize
-    @first_player = GameBuilder.first_player
-    @second_player = GameBuilder.second_player
+    @first_player_symbol = GameBuilder.first_player_symbol
+    @second_player_symbol = GameBuilder.second_player_symbol
     @board = Board.new
   end
 
   def game_play
-    until game_over(:player1) || game_over(:player2)
-      play_a_turn(:first_player)
+    until game_over(:first_player) || game_over(:second_player)
+      play_a_turn(@first_player_symbol)
       #game_over(:first_player)
-      play_a_turn(:second_player)
+      play_a_turn(@second_player_symbol)
       #game_over(:second_player)
     end
   end
@@ -73,3 +73,4 @@ class TwoComputer < Game
     @player2 = Computer
   end 
 end
+

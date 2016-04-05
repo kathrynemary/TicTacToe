@@ -20,16 +20,6 @@ class GameBuilder
 
   def game_symbols
     SymbolInterface.order_of_operations
-    SymbolInterface.player1symbol
-    SymbolInterface.player2symbol 
-  end
-
-  def self.player1symbol
-    SymbolInterface.player1symbol
-  end
-  
-  def self.player2symbol
-    SymbolInterface.player2symbol
   end
 
   def get_order
@@ -42,6 +32,14 @@ class GameBuilder
 
   def self.second_player
     OrderInterface.second_player
+  end
+
+  def self.first_player_symbol
+    OrderInterface.first_player_symbol
+  end
+
+  def self.second_player_symbol
+    OrderInterface.second_player_symbol
   end
 
 end

@@ -1,5 +1,6 @@
 require_relative '../errors'
 require_relative './game_builder_game_type_interface'
+require_relative './game_builder_symbol_interface'
 
 class OrderInterface
 
@@ -26,9 +27,19 @@ class OrderInterface
   def self.translate_input(input) 
     if @input =~ /1/
       @first_player = :player1
+      @first_player_symbol = SymbolInterface.player1symbol
     else
       @first_player = :player2
+      @first_player_symbol = SymbolInterface.player2symbol
     end
+  end
+
+  def self.first_player_symbol
+    @first_player_symbol
+  end
+  
+  def self.second_player_symbol
+    @second_player_symbol
   end
 
   def self.correct_player?  
@@ -42,8 +53,10 @@ class OrderInterface
   def self.second_player
     if first_player == :player1
       @second_player = :player2
+      @second_player_symbol = SymbolInterface.player2symbol
     else 
       @second_player = :player1
+      @second_player_symbol = SymbolInterface.player1symbol
     end
   end
 
