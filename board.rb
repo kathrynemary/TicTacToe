@@ -1,4 +1,5 @@
 require_relative './errors'
+require_relative 'interface/display_board_interface'
 
 class Board
 
@@ -8,26 +9,28 @@ class Board
     @board = {'0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8}
   end
 
-  def available_spaces
-    @board.select {|key,value| value.instance_of?(Fixnum) }
+  def available_spaces 
+    available_spaces = @board.select {|key,value| value = (0..9) } 
   end
 
-  def pick(player, key)
-    if available_spaces.include? key
+  def pick(player, key) 
+    available_spaces
+    if available_spaces.has_key?(key) #extract to include?
       @board[key] = player
       @board
     else
       raise Errors::InputError.new("Error! That space is not available.")
     end
+    puts DisplayBoardInterface.display_board(@board)
   end
 
-  def include?(thing)
-    if available_spaces.has_key? thing
-      return true
-    else
-      return false
-    end
-  end
+#  def self.include?(thing)
+#    if available_spaces.has_key? thing
+#      return true
+#    else
+#      return false
+#    end
+#  end
 
   def winner?(symbol)
     if actual_winner?(symbol) || tie?
@@ -77,3 +80,4 @@ class Board
   end
 
 end
+

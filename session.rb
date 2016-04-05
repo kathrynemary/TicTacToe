@@ -1,4 +1,3 @@
-#require_relative './game_builder'
 require_relative './game'
 
 class Session

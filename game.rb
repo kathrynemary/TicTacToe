@@ -28,10 +28,6 @@ class Game
   
   def play_a_turn(player)
     space = DisplayBoardInterface.ask_space(:board)
-    pick(player, space)   
-  end
-
-  def pick(player, space)
     @board.pick(player, space)
   end
 
@@ -56,6 +52,7 @@ end
 
 class SinglePlayer < Game
   def initialize
+    super
     @player1 = Player
     @player2 = Computer
   end
@@ -63,6 +60,7 @@ end
 
 class TwoPlayer < Game
   def initialize
+    super
     @player1 = Player
     @player2 = Player
   end
@@ -70,6 +68,7 @@ end
 
 class TwoComputer < Game
   def initialize
+    super
     @player1 = Computer
     @player2 = Computer
   end 
