@@ -15,9 +15,11 @@ class Game
   end
 
   def game_play
-    until game_over(@first_player_symbol) || game_over(@second_player_symbol)
+    while true
       play_a_turn(@first_player_symbol) 
+      break if game_over(@first_player_symbol)
       play_a_turn(@second_player_symbol)
+      break if game_over(@second_player_symbol)
     end
   end
   
