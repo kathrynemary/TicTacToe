@@ -3,6 +3,7 @@ require_relative './board'
 require_relative 'Interface/display_board_interface'
 require_relative './game_builder'
 require_relative './computer'
+require_relative 'intelligence'
 
 class Game
   
@@ -23,9 +24,26 @@ class Game
     end
   end
   
+  def get_player_type
+    if GameBuilder.game_type == TwoComputer
+      @player_type = Computer
+    #elsif GameBuilder.game_type == SinglePlayer
+     # @player_type = fadfdafdafda
+    else
+      @player_type = human
+    end
+  end
+
   def play_a_turn(player)
-    space = DisplayBoardInterface.ask_space(:board)
-    @board.pick(player, space)
+    #get_player_type
+    #if @player_type == Computer
+    #  find_move = Intelligence.choose_move(@board)
+    #  @board.pick(player, find_move)
+    #  DisplayBoardInterface.display_board(:board)
+    #else
+      space = DisplayBoardInterface.ask_space(:board)
+      @board.pick(player, space)
+    #end
   end
 
   def check_winner(player)
