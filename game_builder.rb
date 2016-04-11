@@ -15,7 +15,7 @@ class GameBuilder
   end
 
   def self.game_type
-    GameTypeInterface.game_variety.new
+    GameTypeInterface.game_variety
   end
 
   def game_symbols
@@ -26,11 +26,11 @@ class GameBuilder
     OrderInterface.ask_first_player
   end
 
-  def self.first_player
+  def first_player
     OrderInterface.first_player
   end
 
-  def self.second_player
+  def second_player
     OrderInterface.second_player
   end
 

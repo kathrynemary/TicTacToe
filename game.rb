@@ -25,25 +25,26 @@ class Game
   end
   
   def get_player_type
-    if GameBuilder.game_type == TwoComputer
-      @player_type = Computer
+    if GameBuilder.game_type == TwoComputer 
+			@player_type = Computer
     #elsif GameBuilder.game_type == SinglePlayer
      # @player_type = fadfdafdafda
-    else
-      @player_type = human
+    #else
+      #@player_type = human
     end
   end
 
   def play_a_turn(player)
-    #get_player_type
-    #if @player_type == Computer
-    #  find_move = Intelligence.choose_move(@board)
-    #  @board.pick(player, find_move)
-    #  DisplayBoardInterface.display_board(:board)
-    #else
-      space = DisplayBoardInterface.ask_space(:board)
-      @board.pick(player, space)
-    #end
+    get_player_type
+    if @player_type == Computer 
+			find_move = Intelligence.choose_move(@board)
+      puts find_move
+ 			@board.pick(player, find_move)
+      DisplayBoardInterface.display_board(:board)
+ #   else
+ #     space = DisplayBoardInterface.ask_space(:board)
+ #     @board.pick(player, space)
+    end
   end
 
   def check_winner(player)
