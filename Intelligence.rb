@@ -2,10 +2,25 @@ require './board'
 
 class Intelligence
 
-  def self.choose_move(board)
+  def self.choose_move(symbol, board)
     @board = board
+    sets = [['0','1','2'], ['3','4','5'], ['6','7','8'], ['0','3','6'], ['1','4','7'], ['2','5','8'], ['0','4','8'], ['2','4','6']] 
+    @taken_by_self = @board.board.select {|key, value| value == symbol}	
+    puts @taken_by_self #delete this line later
 
-    sets = [['0','1','2'], ['3','4','5'], ['6','7','8'], ['0','3','6'], ['1','4','7'], ['2','5','8'], ['0','4','8'], ['2','4','6']]
+		sets.each_index {|x|
+      @a = (@taken_by_self.has_key? sets[x][0])
+      @b = (@taken_by_self.has_key? sets[x][1])
+      @c = (@taken_by_self.has_key? sets[x][2])
+      if @a && !@b && !@c
+        winning_move = sets[x][0]
+      elsif @b && !@a && !@c
+        winning_move = sets[x][1]
+      elsif @c && !@a && !@b
+        winning_move = sets[x][2]
+      end
+    }
+
     sets.each_index {|x|
       @a = (@board.available_spaces.has_key? sets[x][0])
       @b = (@board.available_spaces.has_key? sets[x][1])
@@ -24,13 +39,12 @@ class Intelligence
 
   def self.pick_middle
     if @board.available_spaces.has_key?('4')
-      return '4'
+      '4'
     else
-      return "I give up."
+      @board.available_spaces.first[0]
     end
   end
 
 end
 
-#fix line 29 to pick a random spot(?) or at least do something
 #recognize difference in other_player almost winning vs self, and have self win when there's a choice.
