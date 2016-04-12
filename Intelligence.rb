@@ -6,18 +6,17 @@ class Intelligence
     @board = board
     sets = [['0','1','2'], ['3','4','5'], ['6','7','8'], ['0','3','6'], ['1','4','7'], ['2','5','8'], ['0','4','8'], ['2','4','6']] 
     @taken_by_self = @board.board.select {|key, value| value == symbol}	
-    puts @taken_by_self #delete this line later
 
 		sets.each_index {|x|
       @a = (@taken_by_self.has_key? sets[x][0])
       @b = (@taken_by_self.has_key? sets[x][1])
       @c = (@taken_by_self.has_key? sets[x][2])
-      if @a && !@b && !@c
-        winning_move = sets[x][0]
-      elsif @b && !@a && !@c
-        winning_move = sets[x][1]
-      elsif @c && !@a && !@b
-        winning_move = sets[x][2]
+      if !@a && @b && @c
+        return sets[x][0]
+      elsif !@b && @a && @c
+        return sets[x][1]
+      elsif !@c && @a && @b
+        return sets[x][2]
       end
     }
 
