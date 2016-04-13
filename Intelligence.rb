@@ -3,47 +3,48 @@ require './board'
 class Intelligence
 
   def self.choose_move(symbol, board)
-    @board = board
-    sets = [['0','1','2'], ['3','4','5'], ['6','7','8'], ['0','3','6'], ['1','4','7'], ['2','5','8'], ['0','4','8'], ['2','4','6']] 
-    @taken_by_self = @board.board.select {|key, value| value == symbol}	
-
-		sets.each_index {|x|
-      @a = (@taken_by_self.has_key? sets[x][0])
-      @b = (@taken_by_self.has_key? sets[x][1])
-      @c = (@taken_by_self.has_key? sets[x][2])
-      if !@a && @b && @c
-        return sets[x][0]
-      elsif !@b && @a && @c
-        return sets[x][1]
-      elsif !@c && @a && @b
-        return sets[x][2]
-      end
-    }
-
-    sets.each_index {|x|
-      @a = (@board.available_spaces.has_key? sets[x][0])
-      @b = (@board.available_spaces.has_key? sets[x][1])
-      @c = (@board.available_spaces.has_key? sets[x][2])
-      if @a && !@b && !@c
-        return sets[x][0]
-      elsif @b && !@a && !@c
-        return sets[x][1]
-      elsif @c && !@a && !@b
-        return sets[x][2]
-      end
-    }
-
-    pick_middle
+    @symbol = symbol
+		@board = board
+		minimax(@board, 0)
+	  @selection	
+	end
+  
+	def self.calculate_score
+    if @board.winner?(@symbol) #it won't know this
+			(10 - @levels.to_i)
+		elsif @board.winner?(other_symbol)
+		 puts "how is it even doing this?"	#get other_score
+			(@levels.to_i - 10)
+		else
+			0
+		end
   end
 
-  def self.pick_middle
-    if @board.available_spaces.has_key?('4')
-      '4'
-    else
-      @board.available_spaces.first[0]
-    end
-  end
+  def self.minimax(board, level)
+    available = @board.available_spaces
+
+  	if @board.winner?(@symbol)
+			calculate_score
+			@levels = @levels.to_i + 1
+			scores = []
+			moves = []
+		end
+
+		puts available
+    possible = available.each_key { |key| @board.pick(@symbol, key)  }   
+			scores.push	minimax(possible, @levels)
+			moves.push space
+
+   # if @game.play_a_turn(symbol) 
+      #max_score = scores.each_with_index.max[1]
+			#@selection = moves[max_score]
+			#scores[max_score]
+		#else
+		#	min_score = scores.each_with_index.min[1]
+		#	@selection = moves[min_score]
+		#	scores[min_score]
+		#end
+	end
 
 end
 
-#recognize difference in other_player almost winning vs self, and have self win when there's a choice.

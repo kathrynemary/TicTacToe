@@ -1,8 +1,4 @@
-# move_position = PerfectAI.new(current_board).determine_move
-#will eventually need to distinguish between the 2 players' moves. That could live elsewhere maybe?
-
 require_relative '../intelligence.rb'
-require_relative '../game.rb'
 require_relative '../board.rb'
 
 describe Intelligence do
@@ -10,22 +6,22 @@ describe Intelligence do
   before :each do
     @x = Board.new
   end
-
+=begin
   it "should pick the middle space if it is available" do
     expect(Intelligence.choose_move("r", @x)).to eq('4')
   end
-
+=end
   it "should not pick 4 when 4 is already taken" do
     @x.pick("P", '4')
     expect(Intelligence.choose_move("K", @x)).not_to eq('4')
   end
-
+=begin
   it "should pick the third to complete the first row" do
     @x.pick("y", "0")
     @x.pick("y", "1")
     expect(Intelligence.choose_move("y", @x)).to eq('2')
   end
-
+=begin
   it "should pick the third to complete the second row" do
     @x.pick("y", '3')
     @x.pick("y", '4')
@@ -118,5 +114,5 @@ describe Intelligence do
     @x.pick("y", '2')
     expect(Intelligence.choose_move("y", @x)).to eq('6')
   end
-
+=end
 end
