@@ -10,6 +10,7 @@ describe Intelligence do
     expect(Intelligence.choose_move("r", "h", @x)).to eq('4')
   end
 =end
+=begin
   it "should not pick 4 when 4 is already taken" do
     @x.pick("P", '4')
     test = Intelligence.new("K", "P", @x)
@@ -113,7 +114,7 @@ describe Intelligence do
 		test = Intelligence.new("y", "g", @x)
     expect(test.choose_move).to eq('8')
   end
-	
+=end	
 	it "should complete the ascending diagonal to win, rather than avoid a loss" do
     @x.pick("g", '0')
     @x.pick("g", '1')
@@ -121,6 +122,13 @@ describe Intelligence do
     @x.pick("y", '2')
     test = Intelligence.new("y", "g", @x)
 		expect(test.choose_move).to eq('6')
+  end
+
+	it "should do something given little input" do
+    @x.pick("g", '1')
+    @x.pick("g", '8')
+    test = Intelligence.new("y", "g", @x)
+		expect(test.choose_move).to eq('4')
   end
 
 end
