@@ -22,16 +22,12 @@ class Intelligence
     @levels = level
     check_for_wins
 		unless @selection
-			first = @available[0]
-			@board.board[first] = @symbol
-			check_for_wins
-				@board.board[first] = first
-
-			#@available.each do |key|
-			#	@board.board[key] = @symbol
-			#	puts @available
-			#	check_for_wins
-		  #end
+	    @available.each {|key| 
+				puts "looking at #{key} now" #delete this later
+				@board.board[key]
+	      check_for_wins
+		    @board.board[key] = key
+			}
 		end
 	end
 		
@@ -44,6 +40,7 @@ class Intelligence
 				@selection = key
 				break
 			else
+				puts "#{key} won't let me win" #delete this later
 				@board.board[key] = key #this knows way too much but YOLO!
 		  end
 		end

@@ -16,7 +16,7 @@ describe Intelligence do
     test = Intelligence.new("K", "P", @x)
 		expect(test.choose_move).not_to eq('4')
   end
-
+=end
   it "should pick the third to complete the first row" do
     @x.pick("y", "0")
     @x.pick("y", "1")
@@ -114,7 +114,7 @@ describe Intelligence do
 		test = Intelligence.new("y", "g", @x)
     expect(test.choose_move).to eq('8')
   end
-=end	
+	
 	it "should complete the ascending diagonal to win, rather than avoid a loss" do
     @x.pick("g", '0')
     @x.pick("g", '1')
@@ -123,12 +123,12 @@ describe Intelligence do
     test = Intelligence.new("y", "g", @x)
 		expect(test.choose_move).to eq('6')
   end
-
+=begin
 	it "should do something given little input" do
     @x.pick("g", '1')
     @x.pick("g", '8')
     test = Intelligence.new("y", "g", @x)
 		expect(test.choose_move).to eq('4')
   end
-
+=end
 end
