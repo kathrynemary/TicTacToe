@@ -14,17 +14,7 @@ class Intelligence
 			minimax(@board, @level)
 		end
 	  @selection
-	end
-  
-	def calculate_score
-		#if @board.winner?(@symbol) 
-		#  (10 - @levels.to_i)
-		#elsif @board.winner?(@other_symbol)
-		#	(@levels.to_i - 10)
-		#else
-		#	0
-		#end
-  end
+	end 
 
   def minimax(board, level)
     #@score = {}
@@ -60,21 +50,4 @@ class Intelligence
 	end
 
 end			
-				#	  @scores.push(possible_move)	#minimax(possible, @levels)
-		 # 	puts "updated scores: #{@scores}"	
-		#		@moves.push(possible_move)
-		#		puts "updated moves: #{@moves}"
- 
-    #calculate_score
-
-		#if @symbol 
-#			max_score = 2 #@scores.max
-#			@selection = "2" #@moves[max_score]
-			 #@scores[max_score]	
-			#else
-				#min_score = @scores.min
-				#@selection = @moves[min_score]
-				#@scores[min_score]
-			  #min_score
-		#end
 
