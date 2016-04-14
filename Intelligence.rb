@@ -10,39 +10,44 @@ class Intelligence
 	end
 
   def choose_move
-		until @selection
-			minimax(@board, @level)
+		minimax(@board, @level)
+		if @selection
+			@selection
+		else
+			branch_out
 		end
-	  @selection
+		@selection
 	end 
 
   def minimax(board, level)
-    #@score = {}
+		@scores = {}
 		@available = @board.available_spaces.keys
     @levels = level
-    check_for_wins
-		unless @selection
-	    @available.each {|key| 
-				puts "looking at #{key} now" #delete this later
-				@board.board[key]
-	      check_for_wins
-		    @board.board[key] = key
-			}
+		check_for_wins
+	end
+		
+	def branch_out
+		@available.each do |key|
+			@level += 1
+			Intelligence.new(@symbol, @other_symbol, @board).choose_move
+			Intelligence.new(@other_symbol, @symbol, @board).choose_move
 		end
 	end
 		
   def check_for_wins
     @available.each do |key|
-			@board.board[key] = @symbol	
+			@board.board[key] = @symbol
 			if @board.winner?(@symbol)  
-				puts "#{key} will let me win!"
-				#@score[key] = 10
+				puts "#{key} will let me win!" #delete this eventually
+				@scores[key] = 10
 				@selection = key
 				break
+			elsif @board.winner?(@other_symbol)
+				@scores[key] = -10
 			else
-				puts "#{key} won't let me win" #delete this later
-				@board.board[key] = key #this knows way too much but YOLO!
-		  end
+				@scores[key] = 0
+				@board.board[key] = key #this knows way too much
+			end
 		end
 	end
 
