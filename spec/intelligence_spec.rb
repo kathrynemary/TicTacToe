@@ -10,14 +10,15 @@ describe Intelligence do
     expect(Intelligence.choose_move("r", "h", @x)).to eq('4')
   end
 =end
-
+=begin
   it "should not pick 4 when 4 is already taken" do
     @x.pick("P", '4')
     test = Intelligence.new("K", "P", @x)
 		expect(test.choose_move).not_to eq('4')
   end
-
-  it "should pick the third to complete the first row" do
+=end
+=begin
+	it "should pick the third to complete the first row" do
     @x.pick("y", "0")
     @x.pick("y", "1")
 		test = Intelligence.new("y", "u", @x)
@@ -123,16 +124,13 @@ describe Intelligence do
     test = Intelligence.new("y", "g", @x)
 		expect(test.choose_move).to eq('6')
   end
-
-  #it "has a score that changes for each level"
-    #i am not sure how to write this test!
- #end
-
+=end	
 	it "should do something given little input" do
     @x.pick("g", '1')
     @x.pick("g", '8')
     test = Intelligence.new("y", "g", @x)
-		expect(test.choose_move).not_to eq('1')
+		valid_moves = ['2', '3', '4', '5', '6', '7']
+		expect(valid_moves).to include(test.choose_move)	
   end
 
 end

@@ -2,35 +2,43 @@ require './board'
 
 class Intelligence
 
-  def initialize(symbol, other_symbol, board)
+  def initialize(symbol, other_symbol, board, depth=0)
     @symbol = symbol
 		@other_symbol = other_symbol
 		@board = board
-		@level = 0
+		@depth = depth
 	end
 
   def choose_move
-		minimax(@board, @level)
-		if @selection
-			@selection
-		else
-			branch_out
+	  puts "currently on level #{@depth}"
+		minimax(@board, @depth)
+    until @board.winner?(@symbol)
+		#until @selection
+	  	branch_out
+	    puts @selection
 		end
-		@selection
-	end 
+		find_high_score
+	end
 
-  def minimax(board, level)
+  def find_high_score
+		puts @scores
+		just_scores = Array.new
+    just_scores = @scores.values
+		maximum_value = just_scores.max.index
+		@scores[maximum_value]
+	end	
+
+  def minimax(board, depth=@depth)
 		@scores = {}
 		@available = @board.available_spaces.keys
-    @levels = level
 		check_for_wins
 	end
 		
 	def branch_out
+		new_depth = @depth + 1
 		@available.each do |key|
-			@level += 1
-			Intelligence.new(@symbol, @other_symbol, @board).choose_move
-			Intelligence.new(@other_symbol, @symbol, @board).choose_move
+      @board.board[key] = @symbol
+			Intelligence.new(@symbol, @other_symbol, @board, new_depth).minimax(@board)	
 		end
 	end
 		
@@ -38,13 +46,14 @@ class Intelligence
     @available.each do |key|
 			@board.board[key] = @symbol
 			if @board.winner?(@symbol)  
-				puts "#{key} will let me win!" #delete this eventually
+				puts "#{key} will let me win!" #delete this
 				@scores[key] = 10
 				@selection = key
 				break
 			elsif @board.winner?(@other_symbol)
 				@scores[key] = -10
 			else
+			  puts "#{key} will not let me win"
 				@scores[key] = 0
 				@board.board[key] = key #this knows way too much
 			end

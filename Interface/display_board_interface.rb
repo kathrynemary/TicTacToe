@@ -15,4 +15,3 @@ class DisplayBoardInterface
   end
 
 end
-
