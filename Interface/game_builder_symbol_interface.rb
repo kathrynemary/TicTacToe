@@ -16,15 +16,15 @@ class SymbolInterface
   end
 
   def self.ask_symbol(player)
-    #"What symbol do you want to use for #{GameTypeInterface.player1_name)}?" #this'll need to be fixed. 
-    puts "what symbol to use?"
+    "What symbol do you want to use for #{GameTypeInterface.player1_name}?" 
   end
 
   def self.get_symbol(player)
-    puts ask_symbol(player)
     @player = player
+    puts ask_symbol(player)
     x = gets.chomp
-    verify_input(x) 
+    verify_input(x)
+	  x	
   end
 
   def self.verify_input(x)

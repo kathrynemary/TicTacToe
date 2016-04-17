@@ -29,10 +29,12 @@ class OrderInterface
       @first_player = :player1
       @first_player_symbol = SymbolInterface.player1symbol
     else
+			puts "input didn't match '1'"
       @first_player = :player2
       @first_player_symbol = SymbolInterface.player2symbol
     end
-  end
+    second_player
+	end
 
   def self.first_player_symbol
     @first_player_symbol

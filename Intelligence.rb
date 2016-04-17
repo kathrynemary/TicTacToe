@@ -22,10 +22,7 @@ class Intelligence
 
   def find_high_score
 		puts @scores
-		just_scores = Array.new
-    just_scores = @scores.values
-		maximum_value = just_scores.max.index
-		@scores[maximum_value]
+    @scores.key(@scores.values.max)
 	end	
 
   def minimax(board, depth=@depth)

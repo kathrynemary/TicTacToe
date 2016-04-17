@@ -28,7 +28,7 @@ describe GameBuilder do
 		@example = GameBuilder.new
 		expect(@example.game_setup).to eq(TwoComputer)
 	end
-=begin
+
   it "should choose a symbol for player1" do #this one isn't passing
     allow(SymbolInterface).to receive(:get_symbol).with(:player1) {"X"} 
     allow(SymbolInterface).to receive(:get_symbol).with(:player2) {"O"} 
@@ -42,7 +42,7 @@ describe GameBuilder do
     GameBuilder.get_order 
     expect(GameBuilder.first_player).to eq(:player1)    
   end
-=end
+
   it "should allow you to select player2 as the 1st player" do	
 		allow(GameTypeInterface).to receive(:ask_game_type) {1}     
 		allow(SymbolInterface).to receive(:get_symbol).with(:player1) {"X"}
@@ -51,7 +51,7 @@ describe GameBuilder do
 		@example = GameBuilder.new 
     expect(@example.first_player).to eq(:player2)    
   end
-
+=begin
   it "correctly assigns 2nd player given player2 as the 1st player" do	
 		allow(GameTypeInterface).to receive(:ask_game_type) {1}     
 		allow(SymbolInterface).to receive(:get_symbol).with(:player1) {"X"}
@@ -60,5 +60,6 @@ describe GameBuilder do
 		@example = GameBuilder.new 
     expect(@example.second_player).to eq(:player1)    
   end
+=end
 end
 
