@@ -24,16 +24,15 @@ class OrderInterface
     translate_input(input)
   end
 
-  def self.translate_input(input) 
+  def self.translate_input(input)
     if @input =~ /1/
       @first_player = :player1
       @first_player_symbol = SymbolInterface.player1symbol
     else
-			puts "input didn't match '1'"
       @first_player = :player2
       @first_player_symbol = SymbolInterface.player2symbol
     end
-    second_player
+		second_player
 	end
 
   def self.first_player_symbol
@@ -54,12 +53,13 @@ class OrderInterface
 
   def self.second_player
     if first_player == :player1
-      @second_player = :player2
+			@second_player = :player2
       @second_player_symbol = SymbolInterface.player2symbol
     else 
       @second_player = :player1
       @second_player_symbol = SymbolInterface.player1symbol
     end
+		@second_player
   end
 
 end
