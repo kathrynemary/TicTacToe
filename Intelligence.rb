@@ -13,12 +13,12 @@ class Intelligence
   def choose_move	
 		available = @board.available_spaces.keys
 		scores = Hash[available.map { |key| [key, branch_out(key)] }]
-    scores.key(scores.values.max)
+		scores.key(scores.values.max)
   end
 
   def find_best_score	
 		if @symbol == @computer
-	    find_high_score
+			find_high_score
 		else
       find_low_score
 		end
@@ -30,7 +30,6 @@ class Intelligence
 	  scores.min
 	end	
 
-
 	def find_high_score
 		available = @board.available_spaces.keys
 		scores = available.map { |key| branch_out(key) }
@@ -41,14 +40,14 @@ class Intelligence
 		new_depth = @depth + 1
 		new_board = Marshal.load(Marshal.dump(@board)) #look this up
 		new_board.board[key] = @symbol
-	  Intelligence.new(@computer, @other_symbol, @symbol, new_board, new_depth).find_score	
+		Intelligence.new(@computer, @other_symbol, @symbol, new_board, new_depth).find_score	
 	end
  
   def find_score
 		if @board.actual_winner?(@computer)  
 			score = 1000 - @depth
 		elsif @board.actual_winner?(enemy_player)
-			score = -1000 - @depth
+			score = -1000 + @depth
 		elsif @board.available_spaces.length == 0
 			score = 0 - @depth
 		else
