@@ -38,7 +38,7 @@ class Intelligence
 		
 	def branch_out(key)
 		new_depth = @depth + 1
-		new_board = Marshal.load(Marshal.dump(@board)) #look this up
+		new_board = Marshal.load(Marshal.dump(@board))
 		new_board.board[key] = @symbol
 		Intelligence.new(@computer, @other_symbol, @symbol, new_board, new_depth).find_score	
 	end

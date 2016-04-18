@@ -164,5 +164,14 @@ describe Intelligence do
     test = Intelligence.new("y", "y", "g", @x)
 		expect(test.choose_move).to eq('4')	
   end
+	
+	it "should do choose a space given little input" do
+    @x.pick("g", '0')
+		@x.pick("y", '3')
+    @x.pick("g", '6')
+    test = Intelligence.new("y", "y", "g", @x)
+		valid_moves = ['1', '2', '4', '5', '7', '8']
+		expect(valid_moves).to include(test.choose_move)	
+  end
 
 end
