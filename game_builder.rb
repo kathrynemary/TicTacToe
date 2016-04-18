@@ -1,6 +1,6 @@
-require_relative 'Interface/display_board_interface'
-require_relative 'Interface/game_builder_game_type_interface'
-require_relative 'Interface/game_builder_order_interface'
+require_relative 'interface/display_board_interface'
+require_relative 'interface/game_builder_game_type_interface'
+require_relative 'interface/game_builder_order_interface'
 
 class GameBuilder 
 
@@ -21,6 +21,14 @@ class GameBuilder
   def game_symbols
     SymbolInterface.order_of_operations
   end
+  
+	def player1symbol
+    SymbolInterface.player1symbol
+  end
+  
+	def player2symbol
+    SymbolInterface.player2symbol
+  end
 
   def get_order
     OrderInterface.ask_first_player
@@ -35,7 +43,7 @@ class GameBuilder
   end
 
   def first_player_symbol
-    OrderInterface.first_player_symbol
+		OrderInterface.first_player_symbol
   end
 
   def second_player_symbol

@@ -17,8 +17,8 @@ class GameTypeInterface
       @game_variety = SinglePlayer
     elsif type == 2
       @game_variety = TwoPlayer
-    elsif type == 3
-      @game_variety = TwoComputer
+		elsif type == 3
+			@game_variety = TwoComputer
     end
   end
 

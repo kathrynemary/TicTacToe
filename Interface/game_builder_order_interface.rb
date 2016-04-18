@@ -40,7 +40,7 @@ class OrderInterface
   end
   
   def self.second_player_symbol
-    @second_player_symbol
+	 	@second_player_symbol
   end
 
   def self.correct_player?  
@@ -59,6 +59,7 @@ class OrderInterface
       @second_player = :player1
       @second_player_symbol = SymbolInterface.player1symbol
     end
+    puts "order interface says second_player symbol is #{@second_player_symbol}"
 		@second_player
   end
 
