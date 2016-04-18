@@ -8,16 +8,30 @@ class Intelligence
 		@other_symbol = other_symbol
 		@board = board
 		@depth = depth
-		puts "currently on level #{@depth}" #delete eventually
 	end
 
   def choose_move	
 		available = @board.available_spaces.keys
 		scores = Hash[available.map { |key| [key, branch_out(key)] }]
     scores.key(scores.values.max)
-	end
+  end
 
-  def find_high_score
+  def find_best_score	
+		if @symbol == @computer
+	    find_high_score
+		else
+      find_low_score
+		end
+	end	
+
+  def find_low_score
+		available = @board.available_spaces.keys
+		scores = available.map { |key| branch_out(key) }
+	  scores.min
+	end	
+
+
+	def find_high_score
 		available = @board.available_spaces.keys
 		scores = available.map { |key| branch_out(key) }
 	  scores.max
@@ -25,27 +39,20 @@ class Intelligence
 		
 	def branch_out(key)
 		new_depth = @depth + 1
-		#new_board = @board.clone
-		new_board = Marshal.load(Marshal.dump(@board))
+		new_board = Marshal.load(Marshal.dump(@board)) #look this up
 		new_board.board[key] = @symbol
 	  Intelligence.new(@computer, @other_symbol, @symbol, new_board, new_depth).find_score	
 	end
  
   def find_score
 		if @board.actual_winner?(@computer)  
-			puts "setting a win score"
-			score = 10 - @depth
+			score = 1000 - @depth
 		elsif @board.actual_winner?(enemy_player)
-			puts "setting a loss score"
-			score = -10 - @depth
+			score = -1000 - @depth
 		elsif @board.available_spaces.length == 0
-			puts "setting a tie score"
 			score = 0 - @depth
 		else
-			puts "branching out"
-			score = find_high_score
-			puts @board.board
-			puts "score is #{score}"
+			score = find_best_score
 		end
 		score
 	end

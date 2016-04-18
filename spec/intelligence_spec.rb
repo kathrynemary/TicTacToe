@@ -125,11 +125,33 @@ describe Intelligence do
   end
 
 	it "should do something given little input" do
-    @x.pick("g", '1')
+    @x.pick("g", '0')
+    test = Intelligence.new("y", "y", "g", @x)
+		valid_moves = ['1', '2', '3', '4', '5', '6', '7', '8']
+		expect(valid_moves).to include(test.choose_move)	
+  end
+	
+	it "should do something given little input" do
     @x.pick("g", '8')
     test = Intelligence.new("y", "y", "g", @x)
-		valid_moves = ['0', '2', '3', '4', '5', '6', '7']
+		valid_moves = ['0', '1', '2', '3', '4', '5', '6', '7']
 		expect(valid_moves).to include(test.choose_move)	
+  end
+	
+	it "should do something given a diagonal win to prevent" do
+    @x.pick("g", '2')
+		@x.pick("y", '0')
+    @x.pick("g", '4')
+    test = Intelligence.new("y", "y", "g", @x)
+		expect(test.choose_move).to eq('6')	
+  end
+	
+	it "should do something given a vertical win to prevent" do
+    @x.pick("g", '1')
+		@x.pick("y", '0')
+    @x.pick("g", '7')
+    test = Intelligence.new("y", "y", "g", @x)
+		expect(test.choose_move).to eq('4')	
   end
 
 end
