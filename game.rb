@@ -11,34 +11,31 @@ class Game
 
   def initialize
     @game_builder = GameBuilder.new
+		@game_builder.build_game
 		@first_player_symbol = @game_builder.player1symbol
-    puts @first_player_symbol
 		@second_player_symbol = @game_builder.player2symbol
-		puts @second_player_symbol
 		@board = Board.new
   end
 
   def game_play
-    while true
+    until game_over
       play_a_turn(@first_player_symbol) 
-      break if game_over(@first_player_symbol)
-      play_a_turn(@second_player_symbol)
-      break if game_over(@second_player_symbol)
+			play_a_turn(@second_player_symbol) #have it check before this
     end
   end
   
-  def get_player_type
-    if GameBuilder.game_type == TwoComputer 
+  def get_player_type(player)
+    if GameBuilder.game_type == TwoComputer || GameBuilder.game_type == SinglePlayer 
 			@player_type = Computer
-    #elsif GameBuilder.game_type == SinglePlayer
-     # @player_type = fadfdafdafda
+    #elsif GameBuilder.game_type == SinglePlayer && player == @second_player_symbol
+		 	#@player_type = Computer
     else
       @player_type = Player
     end
   end
 
   def play_a_turn(player)
-    get_player_type
+		get_player_type(player)
     if @player_type == Computer
 	    computer_turn(player)
     else
@@ -74,10 +71,14 @@ class Game
     end
   end
 
-  def game_over(player)
-    if @board.winner?(player) == true
+  def game_over
+    if @board.winner?(@first_player_symbol) == true || @board.winner?(@second_player_symbol) == true
       puts "Game over!"
-      check_winner(player)
+			if @board.winner?(@first_player_symbol) == true
+        check_winner(@first_player_symbol)
+			else
+        check_winner(@second_player_symbol)
+			end
     end
   end
 

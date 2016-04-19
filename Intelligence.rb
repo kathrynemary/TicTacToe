@@ -48,7 +48,7 @@ class Intelligence
 			score = 1000 - @depth
 		elsif @board.actual_winner?(enemy_player)
 			score = -1000 + @depth
-		elsif @board.available_spaces.length == 0
+		elsif @board.tie?
 			score = 0 - @depth
 		else
 			score = find_best_score

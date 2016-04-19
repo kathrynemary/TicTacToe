@@ -2,9 +2,9 @@ require_relative 'interface/display_board_interface'
 require_relative 'interface/game_builder_game_type_interface'
 require_relative 'interface/game_builder_order_interface'
 
-class GameBuilder 
+class GameBuilder
 
-  def initialize
+  def build_game
     game_setup 
     get_order
 		@player1 = first_player
@@ -21,17 +21,17 @@ class GameBuilder
   end
 
   def game_symbols(player1, player2)
-    SymbolInterface.new(player1, player2)
-  end
+    symbols = SymbolInterface.new(player1, player2)
+		@player1symbol = symbols.assign_player1_symbol
+		@player2symbol = symbols.assign_player2_symbol
+	end
   
 	def player1symbol
-		SymbolInterface.assign_player1_symbol
-    SymbolInterface.player1symbol
-  end
+    @player1symbol
+	end
 
 	def player2symbol
-		SymbolInterface.assign_player2_symbol
-    SymbolInterface.player2symbol
+    @player2symbol
   end
 
   def get_order

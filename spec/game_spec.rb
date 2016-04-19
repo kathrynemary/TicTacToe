@@ -8,8 +8,6 @@ describe Game do
 		  allow(OrderInterface).to receive(:ask_first_player) {:player1}
 			allow(SymbolInterface).to receive(:ask_symbol).with(:player1) {"X"}
 			allow(SymbolInterface).to receive(:ask_symbol).with(:player2) {"O"}
-			#allow(SymbolInterface).to receive(:get_symbol) {"X"}
-			#allow(SymbolInterface).to receive(:get_symbol) {"O"}
 			@example = Game.new
 		end
 
@@ -60,12 +58,13 @@ describe Game do
 		 end
   end
 
-  context"it has a 2-computer game" do 
+  context"it has a 2-computer game" do #these are all failing!
     before :each do
-			allow(GameTypeInterface).to receive(:ask_game_type) {3}
-			allow(SymbolInterface).to receive(:get_symbol).with(:player1) {"X"}
-			allow(SymbolInterface).to receive(:get_symbol).with(:player2) {"O"}
-		  allow(OrderInterface).to receive(:ask_first_player) {:player1}
+			#allow(GameTypeInterface).to receive(:game_type) {TwoComputer}
+		  allow(Game).to receive(:player_type) {Computer}
+			allow(OrderInterface).to receive(:ask_first_player) {:player1}
+			allow(SymbolInterface).to receive(:ask_symbol).with(:player1) {"X"}
+			allow(SymbolInterface).to receive(:ask_symbol).with(:player2) {"O"}
 			@example = Game.new
 		end
 		
@@ -89,7 +88,7 @@ describe Game do
 		#	expect(@example.board.available_spaces).not_to include("5")
 		#end
 
-		it "should complete a horizontal row to win" do
+	it "should complete a horizontal row to win" do
 			@example.board.pick("X", '6')
 			@example.board.pick("X", '7')
 			@example.play_a_turn("X") 

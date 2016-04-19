@@ -11,7 +11,6 @@ class SymbolInterface
   
 	def assign_player1_symbol
 		@player1symbol = get_symbol(@player1)
-    puts "have assigned player1's symbol"
  	end
  
   def assign_player2_symbol
@@ -23,7 +22,7 @@ class SymbolInterface
     answer = gets.chomp
     verify_input(answer)
 		check_equality
-	  answer
+		answer
   end
 
   def ask_symbol(player)
@@ -44,18 +43,19 @@ class SymbolInterface
   end
  
   def check_equality
-    if @player1symbol.to_s == @player2symbol.to_s
-      raise Errors::InputError.new("the symbols can't be the same")
-    end
+		if @player1symbol && @player2symbol
+			if @player1symbol.to_s == @player2symbol.to_s
+				raise Errors::InputError.new("the symbols can't be the same")
+			end
+		end
   end
  
  	def player1symbol
-    puts "player1's symbol is #{@player1symbol}"
 		@player1symbol
   end
 
   def player2symbol
-    @player2symbol
+		@player2symbol
   end
 
 end

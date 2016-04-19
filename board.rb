@@ -61,7 +61,7 @@ class Board
   end
     
   def tie?
-    if @row == true && @taken.size == 9 
+    if available_spaces.length == 0
       true
     else
       false

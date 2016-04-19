@@ -35,14 +35,6 @@ class OrderInterface
 		second_player
 	end
 
-#  def self.first_player_symbol
-#    @first_player_symbol
-#  end
-  
-#  def self.second_player_symbol
-#	 	@second_player_symbol
-#  end
-
   def self.correct_player?  
     @input =~ /1|2/
   end
