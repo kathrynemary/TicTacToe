@@ -20,7 +20,7 @@ class Intelligence
 		if @symbol == @computer
 			find_high_score
 		else
-      find_low_score
+			find_low_score
 		end
 	end	
 

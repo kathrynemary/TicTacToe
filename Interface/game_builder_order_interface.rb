@@ -27,21 +27,21 @@ class OrderInterface
   def self.translate_input(input)
     if @input =~ /1/
       @first_player = :player1
-      @first_player_symbol = SymbolInterface.player1symbol
+ #     @first_player_symbol = SymbolInterface.player1symbol
     else
       @first_player = :player2
-      @first_player_symbol = SymbolInterface.player2symbol
+ #     @first_player_symbol = SymbolInterface.player2symbol
     end
 		second_player
 	end
 
-  def self.first_player_symbol
-    @first_player_symbol
-  end
+#  def self.first_player_symbol
+#    @first_player_symbol
+#  end
   
-  def self.second_player_symbol
-	 	@second_player_symbol
-  end
+#  def self.second_player_symbol
+#	 	@second_player_symbol
+#  end
 
   def self.correct_player?  
     @input =~ /1|2/
@@ -52,14 +52,14 @@ class OrderInterface
   end	
 
   def self.second_player
-    if first_player == :player1
+		if first_player == :player1
 			@second_player = :player2
-      @second_player_symbol = SymbolInterface.player2symbol
+#      @second_player_symbol = SymbolInterface.player2symbol
     else 
       @second_player = :player1
-      @second_player_symbol = SymbolInterface.player1symbol
+#      @second_player_symbol = SymbolInterface.player1symbol
     end
-    puts "order interface says second_player symbol is #{@second_player_symbol}"
+#    puts "order interface says second_player symbol is #{@second_player_symbol}"
 		@second_player
   end
 

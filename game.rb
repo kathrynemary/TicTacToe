@@ -10,9 +10,12 @@ class Game
   attr_reader :board, :game, :first_player_symbol, :second_player_symbol
 
   def initialize
-    @first_player_symbol = GameBuilder.first_player_symbol
-    @second_player_symbol = GameBuilder.second_player_symbol
-    @board = Board.new
+    @game_builder = GameBuilder.new
+		@first_player_symbol = @game_builder.player1symbol
+    puts @first_player_symbol
+		@second_player_symbol = @game_builder.player2symbol
+		puts @second_player_symbol
+		@board = Board.new
   end
 
   def game_play
@@ -25,27 +28,42 @@ class Game
   end
   
   def get_player_type
-#    if GameBuilder.game_type == TwoComputer 
-#			@player_type = Computer
+    if GameBuilder.game_type == TwoComputer 
+			@player_type = Computer
     #elsif GameBuilder.game_type == SinglePlayer
      # @player_type = fadfdafdafda
-    #else
-      @player_type = human
-    #end
+    else
+      @player_type = Player
+    end
   end
 
   def play_a_turn(player)
     get_player_type
-    if @player_type == Computer 
-			find_move = Intelligence.choose_move(@board)
-      puts find_move
- 			@board.pick(player, find_move)
-      DisplayBoardInterface.display_board(:board)
+    if @player_type == Computer
+	    computer_turn(player)
     else
       space = DisplayBoardInterface.ask_space(:board)
       @board.pick(player, space)
     end
   end
+
+  def computer_turn(player)
+		enemy = get_other_player(player)
+		invoke_ai = Intelligence.new(player, player, enemy, @board)
+		find_move = invoke_ai.choose_move
+		@board.pick(player, find_move)
+		DisplayBoardInterface.display_board(:board)
+	end
+
+  def get_other_player(player)
+	  if player = @player1symbol
+			other_player = @player2symbol
+		else
+			other_player = @player1symbol
+		end
+		puts other_player
+		other_player
+	end
 
   def check_winner(player)
     if @board.tie? == false

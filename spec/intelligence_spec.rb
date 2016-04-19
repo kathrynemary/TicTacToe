@@ -174,4 +174,11 @@ describe Intelligence do
 		expect(valid_moves).to include(test.choose_move)	
   end
 
+	it "should complete a vertical match to prevent a loss" do
+		@x.pick("X", '1')
+		@x.pick("X", '7')
+		test = Intelligence.new("O", "O", "X", @x)
+		expect(test.choose_move).to eq('4')	
+	end
+
 end

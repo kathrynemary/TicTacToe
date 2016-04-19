@@ -7,7 +7,9 @@ class GameBuilder
   def initialize
     game_setup 
     get_order
-    game_symbols
+		@player1 = first_player
+		@player2 = second_player
+    game_symbols(@player1, @player2)
   end
       
   def game_setup
@@ -18,15 +20,17 @@ class GameBuilder
     GameTypeInterface.game_variety
   end
 
-  def game_symbols
-    SymbolInterface.order_of_operations
+  def game_symbols(player1, player2)
+    SymbolInterface.new(player1, player2)
   end
   
 	def player1symbol
+		SymbolInterface.assign_player1_symbol
     SymbolInterface.player1symbol
   end
-  
+
 	def player2symbol
+		SymbolInterface.assign_player2_symbol
     SymbolInterface.player2symbol
   end
 
@@ -36,18 +40,10 @@ class GameBuilder
 
   def first_player
     OrderInterface.first_player
-  end
+	end
 
   def second_player
-    OrderInterface.second_player
-  end
-
-  def first_player_symbol
-		OrderInterface.first_player_symbol
-  end
-
-  def second_player_symbol
-    OrderInterface.second_player_symbol
+		OrderInterface.second_player
   end
 
 end
