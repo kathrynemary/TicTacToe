@@ -19,9 +19,7 @@ describe SymbolInterface do
   end
 	
   it "should throw an error if the 2 symbols are the same" do
-    allow(SymbolInterface).to receive(:assign_player1_symbol) {"X"}
-    allow(SymbolInterface).to receive(:assign_player2_symbol) {"X"}
-    expect { @example.check_equality }.to raise_error(Errors::InputError)
+		expect { @example.check_equality("X", "X") }.to raise_error(Errors::InputError)
   end
 	
 	it "lets you assign symbol values to the players" do

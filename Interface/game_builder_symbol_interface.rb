@@ -14,14 +14,18 @@ class SymbolInterface
  	end
  
   def assign_player2_symbol
-		@player2symbol = get_symbol(@player2)
-  end
+	  answer = get_symbol(@player2)
+		check_equality(@player1symbol, answer)
+    @player2symbol = answer
+	end
 
   def get_symbol(player)
     ask_symbol(player)
     answer = gets.chomp
     verify_input(answer)
-		check_equality
+		if @player1symbol && @player2symbol
+		  check_equality
+		end
 		answer
   end
 
@@ -42,11 +46,9 @@ class SymbolInterface
     ask_symbol(:player)
   end
  
-  def check_equality
-		if @player1symbol && @player2symbol
-			if @player1symbol.to_s == @player2symbol.to_s
-				raise Errors::InputError.new("the symbols can't be the same")
-			end
+  def check_equality(symbol_1, symbol_2)
+		if symbol_1.to_s == symbol_2.to_s
+			raise Errors::InputError.new("the symbols can't be the same")
 		end
   end
  
