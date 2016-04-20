@@ -20,8 +20,8 @@ class SymbolInterface
 	end
 
   def get_symbol(player)
-    ask_symbol(player)
-    answer = gets.chomp
+    answer = ask_symbol(player)
+    #answer = gets.chomp
     verify_input(answer)
 		if @player1symbol && @player2symbol
 		  check_equality
@@ -31,7 +31,8 @@ class SymbolInterface
 
   def ask_symbol(player)
     puts "What symbol do you want to use for #{player}?" 
-  end
+    answer = gets.chomp
+	end
 
   def verify_input(input)
     if input =~ /\A[a-zA-Z]{1}\z/

@@ -1,25 +1,30 @@
 require_relative './player'
 require_relative './board'
-require_relative 'Interface/display_board_interface'
+require_relative 'interface/display_board_interface'
 require_relative './game_builder'
 require_relative './computer'
 require_relative 'intelligence'
+require_relative 'interface/game_builder_game_type_interface'
 
 class Game
   
   attr_reader :board, :game, :first_player_symbol, :second_player_symbol
 
   def initialize
-    @game_builder = GameBuilder.new
-		@game_builder.build_game
-    @game_type = GameBuilder.game_type
-		@first_player_symbol = @game_builder.player1symbol
-		@second_player_symbol = @game_builder.player2symbol
 		@board = Board.new
   end
 
+	def set_up
+    @game_builder = GameBuilder.new
+		@game_builder.build_game
+    @game_type = @game_builder.game_type
+		@first_player_symbol = @game_builder.player1symbol
+		@second_player_symbol = @game_builder.player2symbol
+	end
+
   def game_play
-    until game_over
+    set_up
+		until game_over
       play_a_turn(@first_player_symbol) 
 			play_a_turn(@second_player_symbol) #have it check before this
     end
