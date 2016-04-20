@@ -16,7 +16,7 @@ class GameBuilder
     GameTypeInterface.run 
   end
 
-  def self.game_type
+  def game_type
     GameTypeInterface.game_variety
   end
 

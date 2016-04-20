@@ -33,7 +33,7 @@ class Game
   def get_player_type(player)
     if @game_type == TwoComputer
 			@player_type = Computer
-    elsif GameBuilder.game_type == SinglePlayer && player == @second_player_symbol
+    elsif @game_type == SinglePlayer && player == @second_player_symbol
 		 	@player_type = Computer
     else
       @player_type = Player

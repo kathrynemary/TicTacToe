@@ -45,21 +45,5 @@ class GameTypeInterface
     @game_variety
   end
   
-  def self.set_player_names
-    if @game_variety.instance_of? SinglePlayer
-      @player_names = {:player1 => "you", :player2 => "the computer"}
-    elsif @game_variety.instance_of? TwoPlayer
-      @player_names = {:player1 => "the first human", :player2 => "the second human"}
-    elsif @game_variety.instance_of? TwoComputer  
-      @player_names = {:player1 => "the first computer", :player2 => "the second computer"}
-    end
-  end
-
-  def self.get_player_names
-    set_player_names
-    @player1_name = @player_names[:player1]
-    @player2_name = @player_names[:player2]
-  end
-
 end
 
