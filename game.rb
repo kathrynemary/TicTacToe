@@ -12,6 +12,7 @@ class Game
   def initialize
     @game_builder = GameBuilder.new
 		@game_builder.build_game
+    @game_type = GameBuilder.game_type
 		@first_player_symbol = @game_builder.player1symbol
 		@second_player_symbol = @game_builder.player2symbol
 		@board = Board.new
@@ -25,10 +26,10 @@ class Game
   end
   
   def get_player_type(player)
-    if GameBuilder.game_type == TwoComputer || GameBuilder.game_type == SinglePlayer 
+    if @game_type == TwoComputer
 			@player_type = Computer
-    #elsif GameBuilder.game_type == SinglePlayer && player == @second_player_symbol
-		 	#@player_type = Computer
+    elsif GameBuilder.game_type == SinglePlayer && player == @second_player_symbol
+		 	@player_type = Computer
     else
       @player_type = Player
     end
@@ -45,6 +46,7 @@ class Game
   end
 
   def computer_turn(player)
+		puts "let me think..."
 		enemy = get_other_player(player)
 		invoke_ai = Intelligence.new(player, player, enemy, @board)
 		find_move = invoke_ai.choose_move
