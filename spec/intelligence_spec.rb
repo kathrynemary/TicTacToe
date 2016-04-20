@@ -180,5 +180,13 @@ describe Intelligence do
 		test = Intelligence.new("O", "O", "X", @x)
 		expect(test.choose_move).to eq('4')	
 	end
+	
+	it "should choose a good move when opposing player has the first turn" do
+    @x.pick("g", '4')
+		@x.pick("y", '0')
+    @x.pick("g", '2')
+    test = Intelligence.new("y", "y", "g", @x)
+		expect(test.choose_move).to eq('6')	
+  end
 
 end
