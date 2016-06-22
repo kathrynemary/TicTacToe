@@ -6,10 +6,10 @@ Features
 - AI features recursion using Minimax algorithm.
 
 Ruby Version
-ruby 2.2.4
+- ruby 2.2.4
 
 Local Deployment
-ruby session.rb in main
+- ruby session.rb
 
 How to run test suite
-rspec
+- rspec
