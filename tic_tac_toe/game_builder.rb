@@ -1,6 +1,5 @@
-require_relative 'interface/display_board_interface'
-require_relative 'interface/game_builder_game_type_interface'
-require_relative 'interface/game_builder_order_interface'
+require_relative 'game_builder_order_interface'
+require_relative 'game_builder_symbol_interface'
 
 class GameBuilder
 
@@ -24,8 +23,11 @@ class GameBuilder
     symbols = SymbolInterface.new(player1, player2)
 		@player1symbol = symbols.assign_player1_symbol
 		@player2symbol = symbols.assign_player2_symbol
-	end
-  
+  rescue
+    puts "Oh no! The symbol must be a one-letter character, and must not be the same for the two players."
+    game_symbols(player1, player2)
+  end
+
 	def player1symbol
     @player1symbol
 	end

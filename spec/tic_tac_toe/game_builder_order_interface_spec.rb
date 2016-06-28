@@ -1,5 +1,4 @@
-require_relative '../Interface/game_builder_order_interface'
-require_relative '../Interface/game_builder_game_type_interface'
+require 'spec_helper'
 
 describe OrderInterface do
 
@@ -20,7 +19,7 @@ describe OrderInterface do
   end
 
   it "won't let you pick a bad thing for player order" do 
-    expect { OrderInterface.get_first_player("x") }.to raise_error(Errors::InputError) 
+    expect { OrderInterface.get_first_player("x") }.to raise_error(Errors::UserError) 
   end
  
   it "to put player1 as 1st player when 1 is picked" do

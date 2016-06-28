@@ -1,10 +1,5 @@
-require_relative './player'
-require_relative './board'
-require_relative 'interface/display_board_interface'
-require_relative './game_builder'
-require_relative './computer'
-require_relative 'intelligence'
-require_relative 'interface/game_builder_game_type_interface'
+require_relative 'player'
+require_relative 'computer'
 
 class Game
   
@@ -24,9 +19,9 @@ class Game
 
   def game_play
     set_up
-		until game_over
+    until game_over
       play_a_turn(@first_player_symbol) 
-			play_a_turn(@second_player_symbol) #have it check before this
+			play_a_turn(@second_player_symbol) 
     end
   end
   

@@ -1,4 +1,4 @@
-require_relative '../Interface/game_builder_game_type_interface'
+require 'spec_helper'
 
 describe GameTypeInterface do
   
@@ -21,7 +21,7 @@ describe GameTypeInterface do
   end
 
   it "shouldn't let you put in bad input for game_type" do
-    expect { GameTypeInterface.verify_game_type(4) }.to raise_error(Errors::InputError)
+    expect { GameTypeInterface.verify_game_type(4) }.to raise_error(Errors::UserError)
   end
 end
 

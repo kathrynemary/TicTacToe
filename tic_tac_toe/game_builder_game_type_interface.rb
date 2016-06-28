@@ -1,15 +1,13 @@
-require_relative '../board'
-require_relative '../game'
-require_relative '../errors'
-
 class GameTypeInterface
 
   attr_reader :player1, :player2, :symbol
   attr_reader :game_variety, :player_names
 
   def self.run
-    input = ask_game_type
-    game_type(input)
+    #Disabled game_type choice to just work for 1-player game for now.
+    #input = ask_game_type
+    #game_type(input)
+    game_type(1)
   end
 
   def self.game_type(type)
@@ -40,7 +38,7 @@ class GameTypeInterface
     elsif answer == "3"
       game_type(3) 
     else
-      raise Errors::InputError.new("this is a bad answer.")
+      raise Errors::UserError.new("this is a bad answer.")
     end
     @game_variety
   end

@@ -1,5 +1,3 @@
-require_relative '../board'
-
 class DisplayBoardInterface
 
   def self.display_board(x)
@@ -11,7 +9,7 @@ class DisplayBoardInterface
     puts "What space do you want to pick?"
     display_board(board)
     answer = gets.chomp
-    answer #should we verify this?
+    answer
   end
 
 end

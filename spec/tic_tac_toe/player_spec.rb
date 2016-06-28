@@ -1,6 +1,6 @@
-require_relative '../player'
+#require 'spec_helper'
 
-describe Player do
+#describe Player do
 
 	#these test have been moved to game_builder_symbol_interface_spec
-end
+#end

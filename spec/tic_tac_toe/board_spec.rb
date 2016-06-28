@@ -1,4 +1,4 @@
-require_relative '../board'
+require 'spec_helper'
 
 describe Board do
 
@@ -16,7 +16,7 @@ describe Board do
 
   it "should raise an error if an unavailable space is picked" do
     @x.pick('p', '1')
-    expect { @x.pick('p', '1') }.to raise_error(Errors::InputError)
+    expect { @x.pick('p', '1') }.to raise_error(Errors::UserError)
   end
 
   it "should identify when there is a winner" do

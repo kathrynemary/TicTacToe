@@ -1,5 +1,5 @@
 require_relative './errors'
-require_relative 'interface/display_board_interface'
+require_relative './display_board_interface'
 
 class Board
 
@@ -17,7 +17,7 @@ class Board
     if available_spaces.has_key?(key)
       @board[key] = player 
     else
-      raise Errors::InputError.new("Error! That space is not available.")
+      raise Errors::UserError.new("Error! That space is not available.")
     end
     puts DisplayBoardInterface.display_board(@board) 
   end

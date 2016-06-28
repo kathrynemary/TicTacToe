@@ -1,4 +1,4 @@
-require_relative '../Interface/display_board_interface'
+require 'spec_helper'
 
 describe DisplayBoardInterface do
 

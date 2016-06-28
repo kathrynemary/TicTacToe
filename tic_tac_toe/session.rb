@@ -1,5 +1,3 @@
-require_relative './game'
-
 class Session
   
   attr_reader :board, :player1, :player2, :game, :first_player, :second_player
@@ -10,6 +8,3 @@ class Session
 	end
 
 end
-
-play_game = Session.new
-play_game.play

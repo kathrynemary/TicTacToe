@@ -1,4 +1,4 @@
-require_relative '../game_builder'
+require 'spec_helper'
 
 describe GameBuilder do
 		

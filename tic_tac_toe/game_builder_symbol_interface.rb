@@ -1,7 +1,3 @@
-require_relative '../board'
-require_relative '../game'
-require_relative '../errors'
-
 class SymbolInterface
  
   def initialize(player1, player2)
@@ -43,13 +39,12 @@ class SymbolInterface
   end
 
   def invalid_input
-    raise Errors::InputError.new("The symbol must be one letter character. Please try again.")
-    ask_symbol(:player)
+    raise Errors::UserError.new
   end
  
   def check_equality(symbol_1, symbol_2)
 		if symbol_1.to_s == symbol_2.to_s
-			raise Errors::InputError.new("the symbols can't be the same")
+			raise Errors::UserError.new
 		end
   end
  

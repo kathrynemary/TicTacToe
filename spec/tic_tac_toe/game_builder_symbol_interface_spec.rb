@@ -1,4 +1,4 @@
-require_relative '../Interface/game_builder_symbol_interface'
+require 'spec_helper'
 
 describe SymbolInterface do
 
@@ -7,19 +7,19 @@ describe SymbolInterface do
   end
 
   it "should throw an error if you give a multicharacter symbol" do
-    expect { @example.verify_input("yyy") }.to raise_error(Errors::InputError)
+    expect { @example.verify_input("yyy") }.to raise_error(Errors::UserError)
   end
   
   it "should throw an error if you give a number for a symbol" do
-    expect { @example.verify_input("4") }.to raise_error(Errors::InputError)
+    expect { @example.verify_input("4") }.to raise_error(Errors::UserError)
   end
 
   it "should throw an error if you give a nonletter symbol" do
-    expect { @example.verify_input("*") }.to raise_error(Errors::InputError)
+    expect { @example.verify_input("*") }.to raise_error(Errors::UserError)
   end
 	
   it "should throw an error if the 2 symbols are the same" do
-		expect { @example.check_equality("X", "X") }.to raise_error(Errors::InputError)
+		expect { @example.check_equality("X", "X") }.to raise_error(Errors::UserError)
   end
 	
 	it "lets you assign symbol values to the players" do

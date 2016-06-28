@@ -1,7 +1,3 @@
-require_relative '../errors'
-require_relative './game_builder_game_type_interface'
-require_relative './game_builder_symbol_interface'
-
 class OrderInterface
 
   def self.ask_first_player 
@@ -15,12 +11,13 @@ class OrderInterface
   end
 
   def self.first_player_text	  
-    "what is the 1st player? 1 or 2?" #fix this later. #{GameTypeInterface.name(:player1)} or #{GameTypeInterface.name(:player2)}"
+    "What is the 1st player? 1 or 2? \n(If this is a 1-player game, player 2 will be the computer.)"
+    #fix this later. #{GameTypeInterface.name(:player1)} or #{GameTypeInterface.name(:player2)}"
   end
 
   def self.get_first_player(input)
     @input = input 
-    raise Errors::InputError.new("this is a bad answer.") unless correct_player?
+    raise Errors::UserError.new("this is a bad answer.") unless correct_player?
     translate_input(input)
   end
 

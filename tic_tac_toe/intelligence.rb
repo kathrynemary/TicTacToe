@@ -1,5 +1,3 @@
-	require './board'
-
 class Intelligence
 
   def initialize(preferred_player, symbol, other_symbol, board, depth=0)
@@ -45,9 +43,9 @@ class Intelligence
  
   def find_score
 		if @board.actual_winner?(@computer)  
-			score = 1000 - @depth
+			score = 10000 - @depth
 		elsif @board.actual_winner?(enemy_player)
-			score = -1000 + @depth
+			score = -10000 + @depth
 		elsif @board.tie?
 			score = 0 - @depth
 		else

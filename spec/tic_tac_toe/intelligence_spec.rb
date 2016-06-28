@@ -1,4 +1,4 @@
-require_relative '../intelligence.rb'
+require 'spec_helper'
 
 describe Intelligence do
 
